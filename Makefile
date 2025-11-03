@@ -1,41 +1,45 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/10/31 19:15:37 by lomont            #+#    #+#              #
-#    Updated: 2025/11/03 03:58:15 by lomont           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME				= cube3D
 
-NAME 			= cube3D
+CC					= cc
+RM					= rm -f
+CLONE				= git clone --depth=1
 
-CC 				= cc
-RM				= rm -f
-CLONE 			= git clone --depth=1
+SRC_DIR				= src
+OBJ_DIR				= objet
 
-CFLAGS 			= -Wall -Wextra -Werror
-CLINKS			= -ldl -lglfw -pthread -lm
+MLX_INCLUDES		= -I $(MLX) -I $(LIB_C)
+CFLAGS				= -Wall -Wextra -Werror $(MLX_INCLUDES)
+CLINKS				= -ldl -lglfw -pthread -lm
 
-MLX_GIT_URL		= git@github.com:MiniKlar/MLX42.git
-MLX				= MLX42
-LIBMLX 			= $(MLX)/libmlx42.a
+MLX_GIT_URL			= git@github.com:MiniKlar/MLX42.git
+MLX					= MLX42
+LIBMLX				= $(MLX)/libmlx42.a
 
-LIB_C_GIT_URL 	= git@github.com:MiniKlar/LIB_C.git
-LIB_C			= LIB_C
+LIB_C_GIT_URL		= git@github.com:MiniKlar/LIB_C.git
+LIB_C				= LIB_C
+LIB_C_A				= $(LIB_C)/LIB_C.a
 
-SRC 			= ./main.c \
+SRC_FILES			= main.c \
+						parsing.c \
 
-OBJ 			= $(SRC:.c=.o)
+SRC					= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+
+OBJ_FILES			= $(notdir $(SRC_FILES:.c=.o))
+OBJ					= $(addprefix $(OBJ_DIR)/, $(OBJ_FILES))
 
 all: $(NAME)
 
 bonus: $(NAME)
 
-$(NAME): $(MLX) $(LIBMLX) $(LIB_C) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) ./LIB_C/LIB_C.a -o $(NAME)  $(LIBMLX) $(CLINKS)
+$(NAME): $(MLX) $(LIBMLX) $(LIB_C) $(LIB_C_A) $(OBJ_DIR) $(OBJ)
+	@echo "Linking $(NAME)..."
+	$(CC) $(CFLAGS) $(OBJ) $(LIB_C_A) -o $(NAME) $(LIBMLX) $(CLINKS)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBMLX): $(MLX)
 	$(MAKE) -C $(MLX)
@@ -46,22 +50,25 @@ $(MLX):
 
 $(LIB_C):
 	git clone $(LIB_C_GIT_URL) $(LIB_C)
+
+$(LIB_C_A): $(LIB_C)
+	@echo "Compiling $(LIB_C)..."
 	$(MAKE) -C $(LIB_C)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
 clean:
-	$(RM) -r $(LIB_C)
-	$(RM) -r $(MLX)
-	$(RM) $(OBJ)
+	$(MAKE) -C $(LIB_C) clean || true
+	$(MAKE) -C $(MLX) clean || true
+	$(RM) -r $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) $(LIB_C_A)
+	$(RM) $(LIBMLX)
 
 clear: fclean
 	$(RM) -rf $(MLX)
+	$(RM) -rf $(LIB_C)
 
 re: fclean all
 
-.PHONY:	all bonus clear clean fclean re
+.PHONY: all bonus clear clean fclean re
