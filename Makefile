@@ -6,7 +6,7 @@
 #    By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 19:15:37 by lomont            #+#    #+#              #
-#    Updated: 2025/11/03 03:58:15 by lomont           ###   ########.fr        #
+#    Updated: 2025/11/03 21:48:06 by lomont           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,11 @@ RM				= rm -f
 CLONE 			= git clone --depth=1
 
 CFLAGS 			= -Wall -Wextra -Werror
-CLINKS			= -ldl -lglfw -pthread -lm
+## On macOS with Homebrew GLFW, the library lives in the Homebrew lib dir
+## Detect Homebrew prefix (works when brew is installed) and add it to the
+## linker search path so -lglfw can be resolved.
+BREW_PREFIX		= $(shell brew --prefix 2>/dev/null || echo /opt/homebrew)
+CLINKS			= -L$(BREW_PREFIX)/lib -ldl -lglfw -pthread -lm
 
 MLX_GIT_URL		= git@github.com:MiniKlar/MLX42.git
 MLX				= MLX42

@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 19:25:26 by lomont            #+#    #+#             */
-/*   Updated: 2025/10/31 19:25:54 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/03 21:57:29 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 #define EXEC_H
 
 #include "stdio.h"
+#include "stdlib.h"
 
 #endif
