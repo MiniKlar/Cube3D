@@ -1,27 +1,23 @@
-#include "header.h"
+#include "parsing.h"
 
 int	main(int ac, char **av)
 {
-	// t_data data;
-	mlx_t *game;
-	
-	printf("Salut\n");
+	t_data	data;
+
 	if (ac == 2)
 	{
-		if (!parsing(ac, av))
+		init_data(&data);
+		if (!parsing(&data, av[1]))
 		{
-			game = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3D", true);
-			if (!game)
+			data.game = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3D", true);
+			if (!data.game)
 				return (1);
-			mlx_image_t* img = mlx_new_image(game, 256, 256);
-			if (!img || (mlx_image_to_window(game, img, 0, 0) < 0))
+			mlx_image_t	*img = mlx_new_image(data.game, 256, 256);
+			if (!img || (mlx_image_to_window(data.game, img, 0, 0) < 0))
 				return (2);
-		
-			// Even after the image is being displayed, we can still modify the buffer.
 			mlx_put_pixel(img, 0, 0, 0xFF0000FF);
-		
-			mlx_loop(game);
-			mlx_terminate(game);
+			mlx_loop(data.game);
+			mlx_terminate(data.game);
 		}
 	}
 	else

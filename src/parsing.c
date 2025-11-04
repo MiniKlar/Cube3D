@@ -1,14 +1,8 @@
-#include "header.h"
+#include "parsing.h"
 
-void ft_error_exit(const char *msg)
+bool	cub_extension(char *file)
 {
-	printf("Error :\n%s", msg);
-	exit(EXIT_FAILURE);
-}
-
-bool cub_extension(char *file)
-{
-	int len;
+	int	len;
 
 	if (!file)
 		return (0);
@@ -20,9 +14,9 @@ bool cub_extension(char *file)
 	return (0);
 }
 
-int readable_map(char *file)
+int	readable_map(char *file)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -30,15 +24,20 @@ int readable_map(char *file)
 		perror("Error : ");
 		exit(EXIT_FAILURE);
 	}
-	return(fd);
+	return (fd);
 }
 
-bool parsing(int ac, char **av)
+bool	parsing(t_data *data, char *file)
 {
-	int fd;
-	(void)ac;
-	if (!cub_extension(av[1]))
-		ft_error_exit("File must end with <.cub>\n");
-	fd = readable_map(av[1]);
+	int		fd;
+	char	*first_map_line;
+
+	if (!cub_extension(file))
+		ft_error_exit(data, "File must end with <.cub>\n");
+	fd = readable_map(file);
+	first_map_line = parse_config(data, fd);
+	if (!first_map_line)
+		ft_error_exit(data, "Map not found after configuration\n");
+	close(fd);
 	return (printf("End of Parsing\n"), 0);
 }
