@@ -1,5 +1,22 @@
 #include "parsing.h"
 
+bool	parsing(t_data *data, char *file)
+{
+	int		fd;
+	char	*first_line_map;
+
+	if (!cub_extension(file))
+		error_exit(data, "File must end with <.cub>");
+	fd = readable_map_file(file);
+	first_line_map = parse_config(data, fd);
+	if (!first_line_map)
+		error_exit(data, "The map is missing after the configuration");
+	printf("first_line_map = \n'%s'\n", first_line_map);
+	parse_map(data, fd, first_line_map);
+	close(fd);
+	return (printf("End of Parsing\n"), 0);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;

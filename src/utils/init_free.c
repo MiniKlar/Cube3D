@@ -6,7 +6,7 @@ void	init_data(t_data *data)
 	data->player.speed = 0.05;
 }
 
-void	ft_free_data(t_data *data)
+void	free_data(t_data *data)
 {
 	int	i;
 

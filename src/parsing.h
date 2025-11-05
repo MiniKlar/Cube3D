@@ -41,33 +41,30 @@ typedef struct s_data
 	t_player	player;				// Toutes les données du joueur
 }	t_data;
 
-// check_map/
-// parse_config.c
-bool			ft_is_empty_line(char *line);
-char			*ft_strtrim_start(char *s);
-size_t			ft_array_len(char **tab);
-void			ft_free_tab(char **tab);
-// read_map.c
+// utils/..
+
+bool			is_line_empty(char *line);
+char			*strtrim_start(char *s);
+size_t			array_len(char **tab);
+void			free_tab(char **tab);
+void			error_exit(t_data *data, const char *msg);
+void			init_data(t_data *data);
+void			free_data(t_data *data);
+
+// config_validity/..
+
 uint32_t		rgb_to_uint(t_data *data, char *rgb_str);
 bool			validate_color(t_data *data, char *rgb_str, char c);
 bool			validate_texture(t_data *data, char *path_str, char c);
+char			*get_clean_line(t_data *data, int fd, char **line_ptr);
+bool			extract_verif_value(t_data *data, char *trimmed, int *count);
+char			*find_first_map_line(t_data *data, int fd);
 char			*parse_config(t_data *data, int fd);
-
-// utils/
-// check_line.c
-bool			ft_is_empty_line(char *line);
-char			*ft_strtrim_start(char *s);
-size_t			ft_array_len(char **tab);
-void			ft_free_tab(char **tab);
-// error.c
-void			ft_error_exit(t_data *data, const char *msg);
-// init.c
-void			init_data(t_data *data);
-void			ft_free_data(t_data *data);
-
-// parsing.c
 bool			cub_extension(char *file);
-int				readable_map(char *file);
+int				readable_map_file(char *file);
+
+// main
+
 bool			parsing(t_data *data, char *file);
 
 #endif

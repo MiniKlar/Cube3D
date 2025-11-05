@@ -1,6 +1,6 @@
 #include "../parsing.h"
 
-bool	ft_is_empty_line(char *line)
+bool	is_line_empty(char *line)
 {
 	while (*line && *line != '\n')
 	{
@@ -11,14 +11,14 @@ bool	ft_is_empty_line(char *line)
 	return (true);
 }
 
-char	*ft_strtrim_start(char *s)
+char	*strtrim_start(char *s)
 {
 	while (*s != '\0' && ft_isspace(*s))
 		s++;
 	return (s);
 }
 
-size_t	ft_array_len(char **tab)
+size_t	array_len(char **tab)
 {
 	size_t	i;
 
@@ -30,7 +30,7 @@ size_t	ft_array_len(char **tab)
 	return (i);
 }
 
-void	ft_free_tab(char **tab)
+void	free_tab(char **tab)
 {
 	int	i;
 

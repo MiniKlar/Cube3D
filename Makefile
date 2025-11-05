@@ -1,34 +1,34 @@
-NAME                = cube3D
+NAME				= cube3D
 
-CC                  = cc
-RM                  = rm -f
-CLONE               = git clone --depth=1
+CC					= cc
+RM					= rm -f
+CLONE				= git clone --depth=1
 
-SRC_DIR             = src
-OBJ_DIR             = objet
+SRC_DIR				= src
+OBJ_DIR				= objet
 
-MLX_INCLUDES        = -I $(MLX) -I $(LIB_C)
-CFLAGS              = -Wall -Wextra -Werror $(MLX_INCLUDES)
-CLINKS              = -ldl -lglfw -pthread -lm
+MLX_INCLUDES		= -I $(MLX) -I $(LIB_C)
+CFLAGS				= -Wall -Wextra -Werror $(MLX_INCLUDES)
+CLINKS				= -ldl -lglfw -pthread -lm
 
-MLX_GIT_URL         = git@github.com:MiniKlar/MLX42.git
-MLX                 = MLX42
-LIBMLX              = $(MLX)/libmlx42.a
+MLX_GIT_URL			= git@github.com:MiniKlar/MLX42.git
+MLX					= MLX42
+LIBMLX				= $(MLX)/libmlx42.a
 
-LIB_C_GIT_URL       = git@github.com:MiniKlar/LIB_C.git
-LIB_C               = LIB_C
-LIB_C_A             = $(LIB_C)/LIB_C.a
+LIB_C_GIT_URL		= git@github.com:MiniKlar/LIB_C.git
+LIB_C				= LIB_C
+LIB_C_A				= $(LIB_C)/LIB_C.a
 
-SRC_FILES           = main.c \
-	parsing.c \
-	utils/check_line.c \
-	utils/error.c \
-	utils/init.c \
-	map_validity/parse_config.c \
-	map_validity/read_map.c \
+SRC_FILES			= main.c \
+						utils/check_line.c \
+						utils/error.c \
+						utils/init_free.c \
+						config_validity/correct_file.c \
+						config_validity/parse_config.c \
+						config_validity/validate_config.c \
 
-SRC                 = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-OBJ                 = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
+SRC					= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJ					= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(NAME)
 
