@@ -6,14 +6,15 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 19:25:00 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/04 19:17:45 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/06 06:13:07 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "MLX42/mlx42.h"
-#include "LIB_C/LIB_C.h"
-#include <math.h>
+
+void draw_vertical_line(mlx_image_t* image, int x, int draw_start, int draw_end, int color);
+void frametime(t_app *app);
+void create_image(t_app *app);
 
 int worldMap[24][24]=
 {
@@ -43,70 +44,25 @@ int worldMap[24][24]=
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-void draw_vertical_line(mlx_image_t* image, int x, int draw_start, int draw_end, int color)
+void render(t_app *app)
 {
-    int y = draw_start;
-    while (y <= draw_end)
-    {
-        if (x >= 0 && x < (int)image->width && y >= 0 && y < (int)image->height)
-        {
-            mlx_put_pixel(image, x, y, color);
-        }
-        y++;
-    }
-}
-
-void key_pressed(void* param)
-{
-	mlx_t *mlx;
-
-	mlx = param;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		ft_putendl_fd("Gotta go up!!", 1);
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		ft_putendl_fd("Gotta go down!!", 1);
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		ft_putendl_fd("Gotta go right!!", 1);
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		ft_putendl_fd("Gotta go left!!", 1);
-	return ;
-}
-
-int	main(void)
-{
-	mlx_t *mlx;
-	double posX = 22, posY = 12;
-	double dirX = -1, dirY = 0;
-	double planeX = 0, planeY = 0.66;
-
-	double time = 0;
-	double old_time = 0;
-
-	mlx = mlx_init(1920, 1080, "Cube3D", true);
-	if (!mlx)
-		return (1);
-
-	mlx_image_t* img = mlx_new_image(mlx, 1920, 1080);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		return (2);
-
 	int x = 0;
+
 	while (x < 1920)
 	{
 		double cameraX = 2 * x / (double)1920 - 1;
-		double ray_dir_x = dirX + planeX * cameraX;
-		double ray_dir_y = dirY + planeY * cameraX;
+		double ray_dir_x = app->dirX + app->planeX * cameraX;
+		double ray_dir_y = app->dirY + app->planeY * cameraX;
 
-		int mapX = (int)posX;
-		int mapY = (int)posY;
+		int mapX = (int)app->posX;
+		int mapY = (int)app->posY;
 
 		double side_dist_x;
 		double side_dist_y;
 
 		double delta_dist_x;
 		double delta_dist_y;
+
 		double perp_wall_dist;
 
 		if (ray_dir_x == 0)
@@ -128,22 +84,22 @@ int	main(void)
 		if (ray_dir_x < 0)
 		{
 			stepX = -1;
-			side_dist_x = (posX - mapX) * delta_dist_x;
+			side_dist_x = (app->posX - mapX) * delta_dist_x;
 		}
 		else
 		{
 			stepX = 1;
-			side_dist_x = (posX + 1.0 - mapX) * delta_dist_x;
+			side_dist_x = (mapX + 1.0 - app->posX) * delta_dist_x;
 		}
 		if (ray_dir_y < 0)
 		{
 			stepY = -1;
-			side_dist_y = (posY - mapY) * delta_dist_y;
+			side_dist_y = (app->posY - mapY) * delta_dist_y;
 		}
 		else
 		{
 			stepY = 1;
-			side_dist_y = (posY + 1.0 - mapY) * delta_dist_y;
+			side_dist_y = (mapY + 1.0 - app->posY) * delta_dist_y;
 		}
 
 		while (hit == 0)
@@ -193,15 +149,142 @@ int	main(void)
 		if (side == 1)
 			color = color / 2;
 
-		draw_vertical_line(img, x, draw_start, draw_end, color);
+		draw_vertical_line(app->img, x, draw_start, draw_end, color);
 		x++;
 	}
+}
 
-	old_time = time;
+bool init_mlx(mlx_t **mlx)
+{
+	*mlx = mlx_init(1920, 1080, "Cube3D", true);
+	if (!mlx)
+		return (false);
+	return (true);
+}
 
-	// Even after the image is being displayed, we can still modify the buffer.
-	mlx_loop_hook(mlx, &key_pressed, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+bool init_app(t_app *app)
+{
+	if (app)
+	{
+		if (!init_mlx(&app->mlx))
+			return (false);
+		app->posX = 22;
+		app->posY = 12;
+		app->dirX = -1;
+		app->dirY = 0;
+		app->planeX = 0;
+		app->planeY = 0.66;
+		app->time = 0;
+		app->move_speed = 0;
+		app->rot_speed = 0;
+		app->img = NULL;
+		app->fps = NULL;
+	}
+	return (true);
+}
+
+void draw_vertical_line(mlx_image_t* image, int x, int draw_start, int draw_end, int color)
+{
+    int y = draw_start;
+    while (y <= draw_end)
+    {
+        if (x >= 0 && x < (int)image->width && y >= 0 && y < (int)image->height)
+        {
+            mlx_put_pixel(image, x, y, color);
+        }
+        y++;
+    }
+}
+
+void clear_image(t_app *app)
+{
+	ft_memset(app->img->pixels, 0, app->img->width * app->img->height * sizeof(int32_t));
+}
+
+void key_pressed(void* param)
+{
+	t_app *app;
+
+	app = param;
+	if (mlx_is_key_down(app->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(app->mlx);
+	if (mlx_is_key_down(app->mlx, MLX_KEY_W) || mlx_is_key_down(app->mlx, MLX_KEY_UP))
+	{
+		if (!worldMap[(int)(app->posX + app->dirX * app->move_speed)][(int)app->posY])
+			app->posX += app->dirX * app->move_speed;
+		if (!worldMap[(int)app->posX][(int)(app->posY + app->dirY * app->move_speed)])
+			app->posY += app->dirY * app->move_speed;
+	}
+	if (mlx_is_key_down(app->mlx, MLX_KEY_S) || mlx_is_key_down(app->mlx, MLX_KEY_DOWN))
+	{
+		if (!worldMap[(int)(app->posX - app->dirX * app->move_speed)][(int)app->posY])
+			app->posX -= app->dirX * app->move_speed;
+		if (!worldMap[(int)(app->posX)][(int)(app->posY - app->dirY * app->move_speed)])
+			app->posY -= app->dirY * app->move_speed;
+	}
+	if (mlx_is_key_down(app->mlx, MLX_KEY_RIGHT))
+	{
+		double oldDirX = app->dirX;
+		app->dirX = app->dirX * cos(-(app->rot_speed)) - app->dirY * sin(-(app->rot_speed));
+		app->dirY = oldDirX * sin(-(app->rot_speed)) + app->dirY * cos(-(app->rot_speed));
+		double oldPlaneX = app->planeX;
+		app->planeX = app->planeX * cos((-app->rot_speed)) - app->planeY * sin(-(app->rot_speed));
+		app->planeY = oldPlaneX * sin(-(app->rot_speed)) + app->planeY * cos(-app->rot_speed);
+	}
+	if (mlx_is_key_down(app->mlx, MLX_KEY_LEFT))
+	{
+		double oldDirX = app->dirX;
+		app->dirX = app->dirX * cos(app->rot_speed) - app->dirY * sin(app->rot_speed);
+		app->dirY = oldDirX * sin(app->rot_speed) + app->dirY * cos(app->rot_speed);
+		double oldPlaneX = app->planeX;
+		app->planeX = app->planeX * cos(app->rot_speed) - app->planeY * sin(app->rot_speed);
+		app->planeY = oldPlaneX * sin(app->rot_speed) + app->planeY * cos(app->rot_speed);
+	}
+	clear_image(app);
+	render(app);
+	frametime(app);
+}
+
+void frametime(t_app *app)
+{
+	char	*fps_str;
+	char	*tmp;
+	double old_time = app->time;
+
+	if (app->fps)
+		mlx_delete_image(app->mlx, app->fps);
+	app->time = mlx_get_time();
+	double frame_time = (app->time - old_time);
+	app->move_speed = 0.05;
+	app->rot_speed = 0.03;
+	int fps = (1.0 / frame_time);
+	if (SHOW_FPS)
+	{
+		tmp = ft_itoa(fps);
+		fps_str = ft_strjoin("FPS = ", tmp);
+		app->fps = mlx_put_string(app->mlx, fps_str, 0, 0);
+		free(tmp);
+		free(fps_str);
+	}
+}
+
+void create_image(t_app *app)
+{
+	app->img = mlx_new_image(app->mlx, 1920, 1080);
+	if (!app->img || (mlx_image_to_window(app->mlx, app->img, 0, 0) < 0))
+		exit(1);
+}
+
+int	main(void)
+{
+	t_app app;
+
+	if (!init_app(&app))
+		return (1);
+
+	create_image(&app);
+	mlx_loop_hook(app.mlx, &key_pressed, &app);
+	mlx_loop(app.mlx);
+	mlx_terminate(app.mlx);
 	return (0);
 }
