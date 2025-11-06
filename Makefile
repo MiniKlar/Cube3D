@@ -6,7 +6,7 @@
 #    By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 19:15:37 by lomont            #+#    #+#              #
-#    Updated: 2025/11/03 21:48:06 by lomont           ###   ########.fr        #
+#    Updated: 2025/11/06 06:13:35 by lomont           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC 				= cc
 RM				= rm -f
 CLONE 			= git clone --depth=1
 
-CFLAGS 			= -Wall -Wextra -Werror
+CFLAGS 			= -Wall -Wextra -Werror -DSHOW_FPS=0
 ## On macOS with Homebrew GLFW, the library lives in the Homebrew lib dir
 ## Detect Homebrew prefix (works when brew is installed) and add it to the
 ## linker search path so -lglfw can be resolved.
@@ -67,5 +67,8 @@ clear: fclean
 	$(RM) -rf $(MLX)
 
 re: fclean all
+
+test:
+	g++ test.cpp quickcg.cpp `sdl-config --cflags --libs` -o test
 
 .PHONY:	all bonus clear clean fclean re
