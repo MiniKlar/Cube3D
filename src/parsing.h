@@ -63,6 +63,35 @@ char			*parse_config(t_data *data, int fd);
 bool			cub_extension(char *file);
 int				readable_map_file(char *file);
 
+// map_validity/..
+
+char			**copy_grid(t_data *data);
+void			launch_flood_fill_from_player(t_data *data, char **grid);
+void			flood_fill(t_data *data, char **grid, int x, int y, int max_x, int max_y);
+bool			has_unclosed_spaces(char **grid);
+
+bool			is_map_started(char **grid);
+char			**realloc_grid(t_data *data, char **old_grid, int new_rows);
+char			*strtrim_end_nl(char *line);
+
+bool			is_valid_char(char c);
+bool			is_player_char(char c);
+void			set_player_pos(t_data *data, char **grid, int x, int y);
+
+char			**assemble_raw_grid(t_data *data, int fd, char *first_line, int *rows);
+void			validate_chars_and_player(t_data *data, char **grid, int rows);
+void			check_map_closure(t_data *data);
+
+int				get_max_width(char **grid);
+char			*pad_line(char *line, int target_width);
+void			rectangularize_and_store(t_data *data, char **temp_grid, int rows);
+void			store_and_clean_map(t_data *data, char **temp_grid, int rows);
+
+char			**assemble_raw_grid(t_data *data, int fd, char *first_line, int *rows);
+void			validate_chars_and_player(t_data *data, char **grid, int rows);
+void			check_map_closure(t_data *data);
+void			parse_map(t_data *data, int fd, char *first_line_map);
+
 // main
 
 bool			parsing(t_data *data, char *file);

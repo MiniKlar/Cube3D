@@ -11,7 +11,6 @@ bool	parsing(t_data *data, char *file)
 	first_line_map = parse_config(data, fd);
 	if (!first_line_map)
 		error_exit(data, "The map is missing after the configuration");
-	printf("first_line_map = \n'%s'\n", first_line_map);
 	parse_map(data, fd, first_line_map);
 	close(fd);
 	return (printf("End of Parsing\n"), 0);

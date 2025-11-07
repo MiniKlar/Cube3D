@@ -26,6 +26,11 @@ SRC_FILES			= main.c \
 						config_validity/correct_file.c \
 						config_validity/parse_config.c \
 						config_validity/validate_config.c \
+						map_validity/helpers_fullfill.c \
+						map_validity/helpers_grid.c \
+						map_validity/helpers_player_char.c \
+						map_validity/helpers_store_map.c \
+						map_validity/parse_map.c \
 
 SRC					= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ					= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))

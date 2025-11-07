@@ -41,19 +41,22 @@ bool	extract_verif_value(t_data *data, char *trimmed, int *count)
 	return (true);
 }
 
-char	*find_first_map_line(t_data *data, int fd)
+char    *find_first_map_line(t_data *data, int fd)
 {
-	char	*line;
+    char    *line;
+    char    *cleaned_line;
 
-	line = get_next_line(fd);
-	while (line && is_line_empty(line))
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
-	if (!line)
-		error_exit(data, "The map is missing after the configuration.");
-	return (line);
+    line = get_next_line(fd);
+    while (line && is_line_empty(line))
+    {
+        free(line);
+        line = get_next_line(fd);
+    }
+    if (!line)
+        error_exit(data, "The map is missing after the configuration.");
+    cleaned_line = strtrim_end_nl(line);
+    free(line); 
+    return (cleaned_line);
 }
 
 char	*parse_config(t_data *data, int fd)
