@@ -31,23 +31,23 @@
 
 ## 🚀 Exécution (Logique du jeu)
 
-- [ ] **Initialisation :**
-    - [ ] Initialiser la `miniLibX` et créer une fenêtre.
-    - [ ] Charger les 4 textures (Nord, Sud, Est, Ouest).
+- [X] **Initialisation :**
+    - [X] Initialiser la `miniLibX` et créer une fenêtre.
+    - [X] Charger les 4 textures (Nord, Sud, Est, Ouest).
     - [ ] Initialiser la position et l'orientation du joueur (depuis `N`, `S`, `E`, ou `W`).
-- [ ] **Rendu graphique (Ray-casting) :**
-    - [ ] Implémenter l'algorithme de ray-casting pour afficher une vue 3D.
-    - [ ] Dessiner le plafond avec la couleur `C`.
-    - [ ] Dessiner le sol avec la couleur `F`.
+- [X] **Rendu graphique (Ray-casting) :**
+    - [X] Implémenter l'algorithme de ray-casting pour afficher une vue 3D.
+    - [X] Dessiner le plafond avec la couleur `C`.
+    - [X] Dessiner le sol avec la couleur `F`.
     - [ ] Afficher les murs avec la texture correspondante (Nord, Sud, Est, Ouest) selon l'orientation.
-    - [ ] Afficher l'image dans la fenêtre.
-- [ ] **Gestion des événements (Contrôles) :**
+    - [X] Afficher l'image dans la fenêtre.
+- [X] **Gestion des événements (Contrôles) :**
     - [ ] **Déplacement :** Gérer les touches `W`, `S`, et `D` pour le mouvement.
-    - [ ] **Rotation :** Gérer les flèches gauche et droite pour la rotation de la caméra.
-    - [ ] **Quitter (proprement) :**
-        - [ ] Touche `ESC`.
-        - [ ] Clic sur la croix rouge de la fenêtre.
-- [ ] **Stabilité et mémoire :**
+    - [X] **Rotation :** Gérer les flèches gauche et droite pour la rotation de la caméra.
+    - [X] **Quitter (proprement) :**
+        - [X] Touche `ESC`.
+        - [X] Clic sur la croix rouge de la fenêtre.
+- [X] **Stabilité et mémoire :**
     - [ ] Assurer une gestion fluide de la fenêtre (minimisation, etc.).
     - [ ] Libérer toute la mémoire allouée (`free`).
     - [ ] Éviter les crashs (segfault, bus error, etc.).
