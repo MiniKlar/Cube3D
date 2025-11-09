@@ -6,27 +6,57 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 00:41:15 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 01:03:30 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/09 20:16:03 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/exec.h"
 
-static void	init_player(t_player *player)
+static void	set_player_no_so_position(t_app *app, t_player *player)
 {
-	player->pos_x = 22;
-	player->pos_y = 12;
-	player->dir_x = -1;
-	player->dir_y = 0;
-	player->plane_x = 0;
-	player->plane_y = 0.66;
+	if (app->direction == 'N')
+	{
+		player->dir_x = 0;
+		player->dir_y = -1.0;
+		player->plane_x = -0.66;
+		player->plane_y = 0;
+	}
+	else if (app->direction == 'S')
+	{
+		player->dir_x = 0;
+		player->dir_y = 1.0;
+		player->plane_x = 0.66;
+		player->plane_y = 0;
+	}
+}
+
+static void	init_player_direction(t_app *app)
+{
+	t_player	*player;
+
+	player = &app->player;
+	set_player_no_so_position(app, player);
+	if (app->direction == 'E')
+	{
+		player->dir_x = -1.0;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = 0.66;
+	}
+	else if (app->direction == 'W')
+	{
+		player->dir_x = 1.0;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = -0.66;
+	}
 	player->move_speed = 0.05;
 	player->rot_speed = 0.03;
 }
 
 static bool	init_mlx(t_app *app)
 {
-	app->mlx = mlx_init(1920, 1080, "Cube3D", true);
+	app->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cube3D", true);
 	if (!app->mlx)
 		return (false);
 	return (true);
@@ -39,6 +69,10 @@ bool	init_app(t_app *app)
 	ft_bzero(app, sizeof(t_app));
 	if (!init_mlx(app))
 		return (false);
-	init_player(&app->player);
+	app->direction = 'W'; //devoir le set selon parsing
+	init_player_direction(app);
+	app->player.pos_x = 22.5; //same
+	app->player.pos_y = 21.5; //same
+	app->time = mlx_get_time();
 	return (true);
 }
