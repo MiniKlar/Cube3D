@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 00:40:56 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 01:03:50 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/09 17:55:19 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void	calcul_texture_output(t_app *app)
 		ray->wall_x = player->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
 	ray->wall_x -= floor(ray->wall_x);
 	ray->texture_x = (int)(ray->wall_x * (double)TEXTURE_WIDTH);
-	if (ray->side == 0 && ray->ray_dir_x > 0)
+	if (ray->side == 0 && ray->ray_dir_x < 0)
 		ray->texture_x = TEXTURE_WIDTH - ray->texture_x - 1;
-	if (ray->side == 1 && ray->ray_dir_y < 0)
+	if (ray->side == 1 && ray->ray_dir_y > 0)
 		ray->texture_x = TEXTURE_WIDTH - ray->texture_x - 1;
 	ray->step = 1.0 * TEXTURE_HEIGHT / ray->line_height;
 	ray->texture_pos = (ray->draw_start - SCREEN_HEIGHT / 2
