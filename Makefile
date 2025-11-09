@@ -6,7 +6,7 @@
 #    By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 19:15:37 by lomont            #+#    #+#              #
-#    Updated: 2025/11/09 00:09:06 by lomont           ###   ########.fr        #
+#    Updated: 2025/11/09 03:15:37 by lomont           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC 				= cc
 RM				= rm -f
 CLONE 			= git clone --depth=1
 
-CFLAGS 			= -Wall -Wextra -Werror
+CFLAGS 			= -Wall -Wextra -Werror -g
 ## On macOS with Homebrew GLFW, the library lives in the Homebrew lib dir
 ## Detect Homebrew prefix (works when brew is installed) and add it to the
 ## linker search path so -lglfw can be resolved.
@@ -37,6 +37,7 @@ SRC 			= ./src/main.c \
 					./src/raycasting_calcul.c \
 					./src/utils.c \
 					./src/draw.c \
+					./src/key.c
 
 OBJ 			= $(SRC:.c=.o)
 
@@ -73,6 +74,10 @@ clear: fclean
 	$(RM) -rf $(MLX)
 
 re: fclean all
+
+leak: CFLAGS += -g
+leak: re
+	leaks --atExit -- ./$(NAME)
 
 test:
 	g++ test.cpp quickcg.cpp `sdl-config --cflags --libs` -o test
