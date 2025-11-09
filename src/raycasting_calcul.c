@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 22:18:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 00:17:15 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/09 18:44:31 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	calcul_if_wall_hitted(t_app *app)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (worldMap[ray->map_x][ray->map_y] > 0)
+		if (worldMap[ray->map_y][ray->map_x] > 0)
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
@@ -113,13 +113,13 @@ void	calcul_direction(t_app *app)
 
 	ray = &app->ray;
 	i = -1;
-	if (ray->side == 0 && ray->ray_dir_x > 0)
+	if (ray->side == 0 && ray->ray_dir_x < 0)
 		i = 0;
-	else if (ray->side == 0 && ray->ray_dir_x < 0)
-		i = 3;
-	else if (ray->side == 1 && ray->ray_dir_y > 0)
-		i = 2;
 	else if (ray->side == 1 && ray->ray_dir_y < 0)
 		i = 1;
+	else if (ray->side == 1 && ray->ray_dir_y > 0)
+		i = 2;
+	else if (ray->side == 0 && ray->ray_dir_x > 0)
+		i = 3;
 	ray->texture_index = i;
 }
