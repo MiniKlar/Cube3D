@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 19:25:26 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 01:15:55 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/09 03:00:27 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_app
 	mlx_image_t		*img;
 	mlx_texture_t	*textures[4];
 	int				x;
+	uint32_t		ceiling;
+	uint32_t		floor;
 	t_player		player;
 	t_ray			ray;
 }				t_app;
@@ -101,5 +103,6 @@ void		calcul_step_side_distance(t_app *app);
 void		calcul_if_wall_hitted(t_app *app);
 void		create_image(t_app *app);
 void		clear_image(t_app *app);
+void		hook(void* param);
 
 #endif
