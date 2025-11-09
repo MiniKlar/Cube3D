@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 19:25:26 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 03:00:27 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/09 20:11:53 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # endif
 
 # ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 1920
+#  define SCREEN_WIDTH 1080
 # endif
 
 # ifndef SCREEN_HEIGHT
-#  define SCREEN_HEIGHT 1080
+#  define SCREEN_HEIGHT 720
 # endif
 
 # ifndef TEXTURE_WIDTH
@@ -84,10 +84,13 @@ typedef struct s_app
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
+	mlx_image_t		*fps;
 	mlx_texture_t	*textures[4];
-	int				x;
 	uint32_t		ceiling;
 	uint32_t		floor;
+	int				x;
+	double			time;
+	char			direction;
 	t_player		player;
 	t_ray			ray;
 }				t_app;
@@ -103,6 +106,7 @@ void		calcul_step_side_distance(t_app *app);
 void		calcul_if_wall_hitted(t_app *app);
 void		create_image(t_app *app);
 void		clear_image(t_app *app);
+void		frametime(t_app *app, int fps);
 void		hook(void* param);
 
 #endif
