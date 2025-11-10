@@ -60,7 +60,7 @@ bool			validate_color(t_data *data, char *rgb_str, char c);
 bool			validate_texture(t_data *data, char *path_str, char c);
 
 char			*get_clean_line(t_data *data, int fd, char **line_ptr);
-bool			extract_verif_value(t_data *data, char *trimmed, int *count, bool success, int *error);
+int				extract_verif_value(t_data *data, char *trimmed, int *count, bool success);
 char			*find_first_map_line(t_data *data, int fd);
 char			*parse_config(t_data *data, int fd);
 

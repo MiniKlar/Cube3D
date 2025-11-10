@@ -1,7 +1,7 @@
 NO   ./models/north_model.png
 SO     ./models/south_model.png
 EA     ./models/east_model.png
-WE          
+WE          ./models/west_model.png
 
 F 220,100,0
 

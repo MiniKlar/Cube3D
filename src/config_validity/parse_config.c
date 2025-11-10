@@ -14,7 +14,7 @@ char	*get_clean_line(t_data *data, int fd, char **line_ptr)
 	return (trimmed_line);
 }
 
-bool	extract_verif_value(t_data *data, char *trimmed, int *count, bool success, int *error)
+int	extract_verif_value(t_data *data, char *trimmed, int *count, bool success)
 {
 	char	*value;
 
@@ -24,12 +24,12 @@ bool	extract_verif_value(t_data *data, char *trimmed, int *count, bool success, 
 	else if (!ft_strncmp(trimmed, "F ", 2) || !ft_strncmp(trimmed, "C ", 2))
 		value = trimmed + 2;
 	else
-		error_exit(data, "missing configuration identifier.");
+		return (1);
 	value = ft_strtrim(value, " \t\n");
 	if (value == NULL)
-		error_exit(data, "Missing textafazdfzsdfzzxc	e path.");
+		return (2);
 	if (ft_strlen(value) == 0)
-		return (free(value), *error = 3, false);
+		return (free(value), 3);
 	if (!ft_strncmp(trimmed, "NO ", 3) || !ft_strncmp(trimmed, "SO ", 3)
 		|| !ft_strncmp(trimmed, "EA ", 3) || !ft_strncmp(trimmed, "WE ", 3))
 		success = validate_texture(data, value, trimmed[0]);
@@ -38,42 +38,48 @@ bool	extract_verif_value(t_data *data, char *trimmed, int *count, bool success, 
 	if (success)
 		(*count)++;
 	else
-		return (free(value), *error = 4, false);
-	return (free(value), true);
+		return (free(value), 4);
+	return (free(value), 0);
 }
 
-char    *find_first_map_line(t_data *data, int fd)
+char	*find_first_map_line(t_data *data, int fd)
 {
-    char    *line;
-    char    *cleaned_line;
+	char	*line;
+	char	*cleaned_line;
 
-    line = get_next_line(fd);
-    while (line && is_line_empty(line))
-    {
-        free(line);
-        line = get_next_line(fd);
-    }
-    if (!line)
-        error_exit(data, "The map is missing after the configuration.");
-    cleaned_line = strtrim_end_nl(line);
-    free(line); 
-    return (cleaned_line);
+	line = get_next_line(fd);
+	while (line && is_line_empty(line))
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (!line)
+		error_exit(data, "The map is missing after the configuration.");
+	cleaned_line = strtrim_end_nl(line);
+	free(line);
+	return (cleaned_line);
 }
 
 void	correct_error(t_data *data, int error, char *trimmed, char *line)
 {
-	if (error == 3)
+	if (error == 1)
 	{
-		printf("'%s'\n", trimmed);
+		free(line);
+		error_exit(data, "missing configuration identifier.");
+	}
+	else if (error == 2)
+		error_exit(data, "Missing texture path.");
+	else if (error == 3)
+	{
 		free(line);
 		error_exit(data, "Missing texture path.");
 	}
 	else if (error == 4)
 	{
-		free(trimmed);
 		free(line);
 		error_exit(data, "Wrong format or missing value.");
 	}
+	(void)trimmed;
 }
 
 char	*parse_config(t_data *data, int fd)
@@ -82,9 +88,9 @@ char	*parse_config(t_data *data, int fd)
 	char	*trimmed_line;
 	int		found_count;
 	bool	success;
-	int		error;
+	int		verif;
 
-	error = 0;
+	verif = 0;
 	found_count = 0;
 	success = false;
 	while (found_count < CONFIG_COUNT)
@@ -92,9 +98,9 @@ char	*parse_config(t_data *data, int fd)
 		trimmed_line = get_clean_line(data, fd, &line);
 		if (trimmed_line == NULL)
 			continue ;
-		extract_verif_value(data, trimmed_line, &found_count, success, &error);
-		if (error != 0)
-			correct_error(data, error, trimmed_line, line);
+		verif = extract_verif_value(data, trimmed_line, &found_count, success);
+		if (verif != 0)
+			correct_error(data, verif, trimmed_line, line);
 		free(line);
 	}
 	return (find_first_map_line(data, fd));

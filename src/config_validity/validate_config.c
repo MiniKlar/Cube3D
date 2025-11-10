@@ -37,7 +37,7 @@ bool	validate_color(t_data *data, char *rgb_str, char c)
 		error_exit(data, "Color already defined.");
 	*target = rgb_to_uint(data, rgb_str);
 	if (*target)
-		return(true);
+		return (true);
 	return (false);
 }
 
