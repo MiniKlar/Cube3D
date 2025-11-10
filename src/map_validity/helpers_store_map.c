@@ -65,6 +65,7 @@ void	rectangularize_and_store(t_data *data, char **temp_grid, int rows)
 
 void	store_and_clean_map(t_data *data, char **temp_grid, int rows)
 {
-	rectangularize_and_store(data, temp_grid, rows);
-	free_tab(temp_grid);
+	data->map_height = rows;
+	data->map_width = get_max_width(temp_grid); 
+	data->map = temp_grid; 
 }

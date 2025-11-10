@@ -5,6 +5,7 @@ char	*get_clean_line(t_data *data, int fd, char **line_ptr)
 	char	*trimmed_line;
 
 	*line_ptr = get_next_line(fd);
+	printf("ORIGIN: %p\n", *line_ptr);
 	if (!*line_ptr)
 		error_exit(data, "Incomplete file.");
 	if (is_line_empty(*line_ptr))
@@ -13,12 +14,10 @@ char	*get_clean_line(t_data *data, int fd, char **line_ptr)
 	return (trimmed_line);
 }
 
-bool	extract_verif_value(t_data *data, char *trimmed, int *count)
+bool	extract_verif_value(t_data *data, char *trimmed, int *count, bool success, int *error)
 {
 	char	*value;
-	bool	success;
 
-	success = false;
 	if (!ft_strncmp(trimmed, "NO ", 3) || !ft_strncmp(trimmed, "SO ", 3)
 		|| !ft_strncmp(trimmed, "WE ", 3) || !ft_strncmp(trimmed, "EA ", 3))
 		value = trimmed + 3;
@@ -27,8 +26,10 @@ bool	extract_verif_value(t_data *data, char *trimmed, int *count)
 	else
 		error_exit(data, "missing configuration identifier.");
 	value = ft_strtrim(value, " \t\n");
+	if (value == NULL)
+		error_exit(data, "Missing textafazdfzsdfzzxc	e path.");
 	if (ft_strlen(value) == 0)
-		error_exit(data, "Missing texture path.");
+		return (free(value), *error = 3, false);
 	if (!ft_strncmp(trimmed, "NO ", 3) || !ft_strncmp(trimmed, "SO ", 3)
 		|| !ft_strncmp(trimmed, "EA ", 3) || !ft_strncmp(trimmed, "WE ", 3))
 		success = validate_texture(data, value, trimmed[0]);
@@ -37,8 +38,8 @@ bool	extract_verif_value(t_data *data, char *trimmed, int *count)
 	if (success)
 		(*count)++;
 	else
-		error_exit(data, "Wrong format or missing value.");
-	return (true);
+		return (free(value), *error = 4, false);
+	return (free(value), true);
 }
 
 char    *find_first_map_line(t_data *data, int fd)
@@ -59,19 +60,41 @@ char    *find_first_map_line(t_data *data, int fd)
     return (cleaned_line);
 }
 
+void	correct_error(t_data *data, int error, char *trimmed, char *line)
+{
+	if (error == 3)
+	{
+		printf("'%s'\n", trimmed);
+		free(line);
+		error_exit(data, "Missing texture path.");
+	}
+	else if (error == 4)
+	{
+		free(trimmed);
+		free(line);
+		error_exit(data, "Wrong format or missing value.");
+	}
+}
+
 char	*parse_config(t_data *data, int fd)
 {
 	char	*line;
 	char	*trimmed_line;
 	int		found_count;
+	bool	success;
+	int		error;
 
+	error = 0;
 	found_count = 0;
+	success = false;
 	while (found_count < CONFIG_COUNT)
 	{
 		trimmed_line = get_clean_line(data, fd, &line);
 		if (trimmed_line == NULL)
 			continue ;
-		extract_verif_value(data, trimmed_line, &found_count);
+		extract_verif_value(data, trimmed_line, &found_count, success, &error);
+		if (error != 0)
+			correct_error(data, error, trimmed_line, line);
 		free(line);
 	}
 	return (find_first_map_line(data, fd));

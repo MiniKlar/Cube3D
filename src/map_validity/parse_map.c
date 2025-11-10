@@ -70,11 +70,6 @@ void	check_map_closure(t_data *data)
 	if (!test_grid)
 		error_exit(data, "Failed to allocate memory for test grid.");
 	launch_flood_fill_from_player(data, test_grid);
-	if (has_unclosed_spaces(test_grid))
-	{
-		free_tab(test_grid);
-		error_exit(data, "Map is not fully surrounded by walls.");
-	}
 	free_tab(test_grid);
 }
 

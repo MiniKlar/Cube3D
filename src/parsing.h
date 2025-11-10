@@ -47,7 +47,9 @@ bool			is_line_empty(char *line);
 char			*strtrim_start(char *s);
 size_t			array_len(char **tab);
 void			free_tab(char **tab);
+
 void			error_exit(t_data *data, const char *msg);
+
 void			init_data(t_data *data);
 void			free_data(t_data *data);
 
@@ -56,10 +58,12 @@ void			free_data(t_data *data);
 uint32_t		rgb_to_uint(t_data *data, char *rgb_str);
 bool			validate_color(t_data *data, char *rgb_str, char c);
 bool			validate_texture(t_data *data, char *path_str, char c);
+
 char			*get_clean_line(t_data *data, int fd, char **line_ptr);
-bool			extract_verif_value(t_data *data, char *trimmed, int *count);
+bool			extract_verif_value(t_data *data, char *trimmed, int *count, bool success, int *error);
 char			*find_first_map_line(t_data *data, int fd);
 char			*parse_config(t_data *data, int fd);
+
 bool			cub_extension(char *file);
 int				readable_map_file(char *file);
 
@@ -67,8 +71,7 @@ int				readable_map_file(char *file);
 
 char			**copy_grid(t_data *data);
 void			launch_flood_fill_from_player(t_data *data, char **grid);
-void			flood_fill(t_data *data, char **grid, int x, int y, int max_x, int max_y);
-bool			has_unclosed_spaces(char **grid);
+void			flood_fill(t_data *data, char **grid, int x, int y);
 
 bool			is_map_started(char **grid);
 char			**realloc_grid(t_data *data, char **old_grid, int new_rows);

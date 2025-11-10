@@ -8,7 +8,7 @@ SRC_DIR				= src
 OBJ_DIR				= objet
 
 MLX_INCLUDES		= -I $(MLX) -I $(LIB_C)
-CFLAGS				= -Wall -Wextra -Werror $(MLX_INCLUDES)
+CFLAGS				= -Wall -g -Wextra -Werror $(MLX_INCLUDES)
 CLINKS				= -ldl -lglfw -pthread -lm
 
 MLX_GIT_URL			= git@github.com:MiniKlar/MLX42.git
