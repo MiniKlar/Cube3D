@@ -24,47 +24,63 @@ uint32_t	rgb_to_uint(t_data *data, char *rgb_str)
 	return (color);
 }
 
-bool	validate_color(t_data *data, char *rgb_str, char c)
+bool	validate_color(t_data *data, char *rgb_str, char *trimmed)
 {
 	uint32_t	*target;
 
 	target = NULL;
-	if (c == 'C')
+	if (trimmed[0] == 'C')
 		target = &data->textures.ceiling_color;
-	else if (c == 'F')
+	else if (trimmed[0] == 'F')
 		target = &data->textures.floor_color;
 	if (*target != 0)
+	{
+		free(trimmed);
 		error_exit(data, "Color already defined.");
+	}
 	*target = rgb_to_uint(data, rgb_str);
 	if (*target)
 		return (true);
 	return (false);
 }
 
-bool	validate_texture(t_data *data, char *path_str, char c)
+void	assign_texture(t_data *data, char *trimmed, char ***target_ptr)
+{
+	if (trimmed[0] == 'N')
+		*target_ptr = &data->textures.north_path;
+	else if (trimmed[0] == 'S')
+		*target_ptr = &data->textures.south_path;
+	else if (trimmed[0] == 'E')
+		*target_ptr = &data->textures.east_path;
+	else if (trimmed[0] == 'W')
+		*target_ptr = &data->textures.west_path;
+}
+
+bool	validate_texture(t_data *data, char *path_str, char *trimmed)
 {
 	int		fd;
 	char	**target_ptr;
 
 	target_ptr = NULL;
-	if (c == 'N')
-		target_ptr = &data->textures.north_path;
-	else if (c == 'S')
-		target_ptr = &data->textures.south_path;
-	else if (c == 'E')
-		target_ptr = &data->textures.east_path;
-	else if (c == 'W')
-		target_ptr = &data->textures.west_path;
+	assign_texture(data, trimmed, &target_ptr);
 	if (*target_ptr != NULL)
-		error_exit(data, "Texture already defined.");
+	{
+		free(path_str);
+		free(trimmed);
+		error_exit(data, "Identifier already defined.");
+	}
 	if (!path_str || ft_strlen(path_str) == 0)
 		error_exit(data, "Missing texture path.");
 	fd = open(path_str, O_RDONLY);
 	if (fd < 0)
+	{
+		free(path_str);
+		free(trimmed);
 		error_exit(data, "Unreadable texture.");
+	}
 	close(fd);
 	*target_ptr = ft_strdup(path_str);
 	if (!*target_ptr)
 		error_exit(data, "Memory Allocation failled for the path.");
-	return (true);
+	return (1);
 }

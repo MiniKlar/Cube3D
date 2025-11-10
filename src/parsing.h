@@ -56,8 +56,8 @@ void			free_data(t_data *data);
 // config_validity/..
 
 uint32_t		rgb_to_uint(t_data *data, char *rgb_str);
-bool			validate_color(t_data *data, char *rgb_str, char c);
-bool			validate_texture(t_data *data, char *path_str, char c);
+bool			validate_color(t_data *data, char *rgb_str, char *trimmed);
+bool			validate_texture(t_data *data, char *path_str, char *trimmed);
 
 char			*get_clean_line(t_data *data, int fd, char **line_ptr);
 int				extract_verif_value(t_data *data, char *trimmed, int *count, bool success);

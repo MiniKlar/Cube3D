@@ -5,7 +5,6 @@ char	*get_clean_line(t_data *data, int fd, char **line_ptr)
 	char	*trimmed_line;
 
 	*line_ptr = get_next_line(fd);
-	printf("ORIGIN: %p\n", *line_ptr);
 	if (!*line_ptr)
 		error_exit(data, "Incomplete file.");
 	if (is_line_empty(*line_ptr))
@@ -32,9 +31,9 @@ int	extract_verif_value(t_data *data, char *trimmed, int *count, bool success)
 		return (free(value), 3);
 	if (!ft_strncmp(trimmed, "NO ", 3) || !ft_strncmp(trimmed, "SO ", 3)
 		|| !ft_strncmp(trimmed, "EA ", 3) || !ft_strncmp(trimmed, "WE ", 3))
-		success = validate_texture(data, value, trimmed[0]);
+		success = validate_texture(data, value, trimmed);
 	else if (!ft_strncmp(trimmed, "F ", 2) || !ft_strncmp(trimmed, "C ", 2))
-		success = validate_color(data, value, trimmed[0]);
+		success = validate_color(data, value, trimmed);
 	if (success)
 		(*count)++;
 	else
