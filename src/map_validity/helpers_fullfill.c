@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:11 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/10 18:16:12 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:41:55 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ void	flood_fill(t_data *data, char **grid, int x, int y)
 	{
 		free_tab(grid);
 		error_exit(data, "Map is not fully enclosed.");
-		return;
 	}
 	if (grid[y][x] == '1' || grid[y][x] == 'V')
 		return ;
 	if (grid[y][x] == ' ')
-		error_exit(data, "Player's room touches outer empty space.");
+	{
+		free_tab(grid);
+		error_exit(data, "Player's room touches empty space.");
+	}
 	if (grid[y][x] == '0')
 		grid[y][x] = 'V';
 	else
