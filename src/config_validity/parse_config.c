@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:29 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/10 18:16:30 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:55:21 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_clean_line(t_data *data, int fd, char **line_ptr)
 	return (trimmed_line);
 }
 
-int	extract_verif_value(t_data *data, char *trimmed, int *count, bool success)
+int	extract_value(t_data *data, char *trimmed, int *count, bool valid)
 {
 	char	*value;
 
@@ -43,10 +43,10 @@ int	extract_verif_value(t_data *data, char *trimmed, int *count, bool success)
 		return (free(value), 3);
 	if (!ft_strncmp(trimmed, "NO ", 3) || !ft_strncmp(trimmed, "SO ", 3)
 		|| !ft_strncmp(trimmed, "EA ", 3) || !ft_strncmp(trimmed, "WE ", 3))
-		success = validate_texture(data, value, trimmed);
+		valid = validate_texture(data, value, trimmed);
 	else if (!ft_strncmp(trimmed, "F ", 2) || !ft_strncmp(trimmed, "C ", 2))
-		success = validate_color(data, value, trimmed);
-	if (success)
+		valid = validate_color(data, value, trimmed);
+	if (valid)
 		(*count)++;
 	else
 		return (free(value), 4);
@@ -109,7 +109,7 @@ char	*parse_config(t_data *data, int fd)
 		trimmed_line = get_clean_line(data, fd, &line);
 		if (trimmed_line == NULL)
 			continue ;
-		verif = extract_verif_value(data, trimmed_line, &found_count, success);
+		verif = extract_value(data, trimmed_line, &found_count, success);
 		if (verif != 0)
 			correct_error(data, verif, trimmed_line, line);
 		free(line);

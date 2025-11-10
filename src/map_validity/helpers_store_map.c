@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:20 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/10 18:16:21 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:43:47 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void	rectangularize_and_store(t_data *data, char **temp_grid, int rows)
 void	store_and_clean_map(t_data *data, char **temp_grid, int rows)
 {
 	data->map_height = rows;
-	data->map_width = get_max_width(temp_grid); 
-	data->map = temp_grid; 
+	data->map_width = get_max_width(temp_grid);
+	data->map = temp_grid;
 }
