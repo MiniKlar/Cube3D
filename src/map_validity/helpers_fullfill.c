@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers_fullfill.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/10 18:16:11 by abeaufil          #+#    #+#             */
+/*   Updated: 2025/11/10 18:16:12 by abeaufil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../parsing.h"
 
 char	**copy_grid(t_data *data)
@@ -30,11 +42,20 @@ void	launch_flood_fill_from_player(t_data *data, char **grid)
 	start_x = (int)data->player.pos_x;
 	start_y = (int)data->player.pos_y;
 	if (start_y < 0 || start_y >= data->map_height)
+	{
+		free_tab(grid);
 		error_exit(data, "Player start Y is out of map bounds.");
+	}
 	if (start_x < 0 || start_x >= (int)ft_strlen(grid[start_y]))
+	{
+		free_tab(grid);
 		error_exit(data, "Player start X is out of map bounds.");
+	}
 	if (grid[start_y][start_x] == '1')
+	{
+		free_tab(grid);
 		error_exit(data, "Player starts inside a wall.");
+	}
 	flood_fill(data, grid, start_x, start_y);
 }
 
@@ -47,6 +68,7 @@ void	flood_fill(t_data *data, char **grid, int x, int y)
 	max_x = ft_strlen(grid[y]);
 	if (y < 0 || y >= max_y || x < 0 || x >= max_x)
 	{
+		free_tab(grid);
 		error_exit(data, "Map is not fully enclosed.");
 		return;
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/10 18:16:23 by abeaufil          #+#    #+#             */
+/*   Updated: 2025/11/10 18:35:50 by abeaufil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../parsing.h"
 
 char	**assemble_raw_grid(t_data *data, int fd, char *first_line, int *rows)
@@ -17,7 +29,11 @@ char	**assemble_raw_grid(t_data *data, int fd, char *first_line, int *rows)
 		if (!line)
 			break ;
 		if (is_line_empty(line) && is_map_started(grid))
+		{
+			free(line);
+			free_tab(grid);
 			error_exit(data, "Empty line inside map data.");
+		}
 		if (is_line_empty(line))
 		{
 			free(line);
@@ -30,7 +46,11 @@ char	**assemble_raw_grid(t_data *data, int fd, char *first_line, int *rows)
 	}
 	*rows = i;
 	if (*rows < 3)
+	{
+		free(line);
+		free_tab(grid);
 		error_exit(data, "Map too small or invalid structure.");
+	}
 	return (grid);
 }
 
@@ -48,7 +68,10 @@ void	validate_chars_and_player(t_data *data, char **grid, int rows)
 		while (grid[y][x])
 		{
 			if (!is_valid_char(grid[y][x]))
+			{
+				free_tab(grid);
 				error_exit(data, "Invalid character in map.");
+			}
 			if (is_player_char(grid[y][x]))
 			{
 				set_player_pos(data, grid, x, y);
@@ -59,7 +82,10 @@ void	validate_chars_and_player(t_data *data, char **grid, int rows)
 		y++;
 	}
 	if (player_count != 1)
+	{
+		free_tab(grid);
 		error_exit(data, "Map must contain exactly one player start position.");
+	}
 }
 
 void	check_map_closure(t_data *data)
