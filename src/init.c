@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 00:41:15 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/11 15:56:42 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 16:33:20 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ bool	init_app(t_app *app)
 	if (!app)
 		return (false);
 	ft_bzero(app, sizeof(t_app));
-	if (!init_mlx(app))
-		return (false);
 	app->time = mlx_get_time();
 	return (true);
 }

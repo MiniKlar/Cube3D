@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:43:02 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 16:02:50 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 16:34:00 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,17 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		if (!init_app(&app))
-				return (1);
+			return (1);
 		if (!parsing(&app, av[1]))
 		{
-			init_player_direction(&app);
-			create_image(&app);
-			mlx_loop_hook(app.mlx, &hook, &app);
-			mlx_loop(app.mlx);
-			mlx_terminate(app.mlx);
+			if (!init_mlx(app))
+			{
+				init_player_direction(&app);
+				create_image(&app);
+				mlx_loop_hook(app.mlx, &hook, &app);
+				mlx_loop(app.mlx);
+				mlx_terminate(app.mlx);
+			}
 		}
 	}
 	else
