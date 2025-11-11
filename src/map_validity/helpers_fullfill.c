@@ -3,67 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_fullfill.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:11 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 13:35:13 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:02:10 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing.h"
+#include "cube.h"
 
-char	**copy_grid(t_data *data)
+char	**copy_grid(t_app *app)
 {
 	char	**test_grid;
 	int		y;
 
-	test_grid = ft_calloc(data->map_height + 1, sizeof(char *));
+	test_grid = ft_calloc(app->map_height + 1, sizeof(char *));
 	if (!test_grid)
-		error_exit(data, "Grid copy memory fail.");
+		error_exit(app, "Grid copy memory fail.");
 	y = 0;
-	while (y < data->map_height)
+	while (y < app->map_height)
 	{
-		test_grid[y] = ft_strdup(data->map[y]);
+		test_grid[y] = ft_strdup(app->map[y]);
 		if (!test_grid[y])
-			error_exit_1(data, "Grid row copy memory fail.", test_grid);
+			error_exit_1(app, "Grid row copy memory fail.", test_grid);
 		y++;
 	}
 	return (test_grid);
 }
 
-void	launch_flood_fill_from_player(t_data *data, char **grid)
+void	launch_flood_fill_from_player(t_app *app, char **grid)
 {
 	int	start_x;
 	int	start_y;
 
-	start_x = (int)data->player.pos_x;
-	start_y = (int)data->player.pos_y;
-	if (start_y < 0 || start_y >= data->map_height)
-		error_exit_1(data, "Player start Y is out of map.", grid);
+	start_x = (int)app->player.pos_x;
+	start_y = (int)app->player.pos_y;
+	if (start_y < 0 || start_y >= app->map_height)
+		error_exit_1(app, "Player start Y is out of map.", grid);
 	if (start_x < 0 || start_x >= (int)ft_strlen(grid[start_y]))
-		error_exit_1(data, "Player start X is out of map.", grid);
-	flood_fill(data, grid, start_x, start_y);
+		error_exit_1(app, "Player start X is out of map.", grid);
+	flood_fill(app, grid, start_x, start_y);
 }
 
-void	flood_fill(t_data *data, char **grid, int x, int y)
+void	flood_fill(t_app *app, char **grid, int x, int y)
 {
 	int	max_x;
 	int	max_y;
 
-	max_y = data->map_height;
+	max_y = app->map_height;
 	max_x = ft_strlen(grid[y]);
 	if (y < 0 || y >= max_y || x < 0 || x >= max_x)
-		error_exit_1(data, "Map is not fully enclosed.", grid);
+		error_exit_1(app, "Map is not fully enclosed.", grid);
 	if (grid[y][x] == '1' || grid[y][x] == 'V')
 		return ;
 	if (grid[y][x] == ' ')
-		error_exit_1(data, "Player's room touches empty space.", grid);
+		error_exit_1(app, "Player's room touches empty space.", grid);
 	if (grid[y][x] == '0')
 		grid[y][x] = 'V';
 	else
 		return ;
-	flood_fill(data, grid, x + 1, y);
-	flood_fill(data, grid, x - 1, y);
-	flood_fill(data, grid, x, y + 1);
-	flood_fill(data, grid, x, y - 1);
+	flood_fill(app, grid, x + 1, y);
+	flood_fill(app, grid, x - 1, y);
+	flood_fill(app, grid, x, y + 1);
+	flood_fill(app, grid, x, y - 1);
 }

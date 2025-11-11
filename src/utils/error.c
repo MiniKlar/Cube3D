@@ -6,28 +6,28 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:32:12 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/11 15:32:19 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 16:02:10 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing.h"
+#include "cube.h"
 
-void	error_exit_1(t_data *data, char *msg, char **tab)
+void	error_exit_1(t_app *app, char *msg, char **tab)
 {
 	free_tab(tab);
-	error_exit(data, msg);
+	error_exit(app, msg);
 }
 
-void	error_exit_2(t_data *data, char *msg, char **tab, char *tab_2)
+void	error_exit_2(t_app *app, char *msg, char **tab, char *tab_2)
 {
 	free_tab(tab);
 	free(tab_2);
-	error_exit(data, msg);
+	error_exit(app, msg);
 }
 
-void	error_exit(t_data *data, char *msg)
+void	error_exit(t_app *app, char *msg)
 {
 	printf("Error : %s\n", msg);
-	free_data(data);
+	free_app(app);
 	exit(EXIT_FAILURE);
 }

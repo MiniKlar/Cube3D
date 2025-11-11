@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_player_char.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:18 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/10 18:16:19 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:02:10 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing.h"
+#include "cube.h"
 
 bool	is_valid_char(char c)
 {
@@ -28,10 +28,10 @@ bool	is_player_char(char c)
 	return (false);
 }
 
-void	set_player_pos(t_data *data, char **grid, int x, int y)
+void	set_player_pos(t_app *app, char **grid, int x, int y)
 {
-	data->player.pos_x = (double)x + 0.5;
-	data->player.pos_y = (double)y + 0.5;
-	data->player.start_direction = grid[y][x];
+	app->player.pos_x = (double)x + 0.5;
+	app->player.pos_y = (double)y + 0.5;
+	app->player.start_direction = grid[y][x];
 	grid[y][x] = '0';
 }

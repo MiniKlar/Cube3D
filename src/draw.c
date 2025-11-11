@@ -6,11 +6,11 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 01:40:09 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 01:05:35 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 16:18:17 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../includes/cube.h"
 
 static uint32_t	texture_color(t_app *app, int i, int texY, int texX)
 {
@@ -23,7 +23,7 @@ static uint32_t	texture_color(t_app *app, int i, int texY, int texX)
 	bytes_per_pixels = app->textures[i]->bytes_per_pixel;
 	pixel_index = (texY * app->textures[i]->width + texX) * bytes_per_pixels;
 	color = get_rgba(pixels[pixel_index], pixels[pixel_index + 1],
-			pixels[pixel_index + 2], pixels[pixel_index + 3]);
+			pixels[pixel_index + 2]);
 	return (color);
 }
 
@@ -55,7 +55,7 @@ static void	draw_floor(t_app *app)
 	uint32_t	floor;
 
 	ray = &app->ray;
-	floor = get_rgba(220, 100, 0, 255);
+	floor = app->floor;
 	y = ray->draw_end + 1;
 	while (y < SCREEN_HEIGHT)
 	{
@@ -71,7 +71,7 @@ static void	draw_ceiling(t_app *app)
 	uint32_t	ceiling;
 
 	ray = &app->ray;
-	ceiling = get_rgba(225, 30, 0, 255);
+	ceiling = app->ceiling;
 	y = 0;
 	while (y < ray->draw_start)
 	{

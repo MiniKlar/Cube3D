@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_store_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:20 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 13:26:54 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:02:10 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing.h"
+#include "cube.h"
 
 int	get_max_width(char **grid)
 {
@@ -30,9 +30,9 @@ int	get_max_width(char **grid)
 	return (max_width);
 }
 
-void	store_map(t_data *data, char **temp_grid, int rows)
+void	store_map(t_app *app, char **temp_grid, int rows)
 {
-	data->map_height = rows;
-	data->map_width = get_max_width(temp_grid);
-	data->map = temp_grid;
+	app->map_height = rows;
+	app->map_width = get_max_width(temp_grid);
+	app->map = temp_grid;
 }

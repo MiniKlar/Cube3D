@@ -6,11 +6,11 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 00:40:56 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 17:55:19 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 15:47:23 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../includes/cube.h"
 
 static void	calcul_texture_output(t_app *app)
 {

@@ -6,11 +6,11 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 01:09:03 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 20:03:41 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 15:47:23 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../includes/cube.h"
 
 void	frametime(t_app *app, int fps)
 {

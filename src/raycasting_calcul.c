@@ -6,11 +6,11 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 22:18:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 18:44:31 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 16:13:30 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../includes/cube.h"
 
 void	calcul_if_wall_hitted(t_app *app)
 {
@@ -32,7 +32,7 @@ void	calcul_if_wall_hitted(t_app *app)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (worldMap[ray->map_y][ray->map_x] > 0)
+		if (app->map[ray->map_y][ray->map_x] > 0)
 			ray->hit = 1;
 	}
 	if (ray->side == 0)

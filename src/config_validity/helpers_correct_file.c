@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   correct_file.c                                     :+:      :+:    :+:   */
+/*   helpers_correct_file.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:31 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/10 18:16:32 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:02:10 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing.h"
+#include "cube.h"
 
 bool	cub_extension(char *file)
 {

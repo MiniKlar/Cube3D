@@ -6,11 +6,11 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 06:20:36 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 02:33:00 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 15:47:23 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../includes/cube.h"
 
 void	create_image(t_app *app)
 {

@@ -6,11 +6,11 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 02:57:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/09 20:03:04 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 16:20:03 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../includes/cube.h"
 
 static void	handle_left_right_keys(mlx_t *mlx, t_player *player)
 {
@@ -33,45 +33,45 @@ static void	handle_left_right_keys(mlx_t *mlx, t_player *player)
 		* cos(rot_speed);
 }
 
-static void	handle_q_d_keys(mlx_t *mlx, t_player *player)
+static void	handle_q_d_keys(char **map, mlx_t *mlx, t_player *player)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
-		if (!worldMap[(int)player->pos_y][(int)(player->pos_x + player->plane_x
+		if (!map[(int)player->pos_y][(int)(player->pos_x + player->plane_x
 			* player->move_speed)])
 			player->pos_x += player->plane_x * player->move_speed;
-		if (!worldMap[(int)(player->pos_y + player->plane_y
+		if (!map[(int)(player->pos_y + player->plane_y
 				* player->move_speed)][(int)player->pos_x])
 			player->pos_y += player->plane_y * player->move_speed;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_Q))
 	{
-		if (!worldMap[(int)player->pos_y][(int)(player->pos_x - player->plane_x
+		if (!map[(int)player->pos_y][(int)(player->pos_x - player->plane_x
 			* player->move_speed)])
 			player->pos_x -= player->plane_x * player->move_speed;
-		if (!worldMap[(int)(player->pos_y - player->plane_y
+		if (!map[(int)(player->pos_y - player->plane_y
 				* player->move_speed)][(int)player->pos_x])
 			player->pos_y -= player->plane_y * player->move_speed;
 	}
 }
 
-static void	handle_w_s_keys(mlx_t *mlx, t_player *player)
+static void	handle_w_s_keys(char **map, mlx_t *mlx, t_player *player)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
-		if (!worldMap[(int)player->pos_y][(int)(player->pos_x + player->dir_x
+		if (!map[(int)player->pos_y][(int)(player->pos_x + player->dir_x
 			* player->move_speed)])
 			player->pos_x += player->dir_x * player->move_speed;
-		if (!worldMap[(int)(player->pos_y + player->dir_y
+		if (!map[(int)(player->pos_y + player->dir_y
 				* player->move_speed)][(int)player->pos_x])
 			player->pos_y += player->dir_y * player->move_speed;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
-		if (!worldMap[(int)player->pos_y][(int)(player->pos_x - player->dir_x
+		if (!map[(int)player->pos_y][(int)(player->pos_x - player->dir_x
 			* player->move_speed)])
 			player->pos_x -= player->dir_x * player->move_speed;
-		if (!worldMap[(int)(player->pos_y - player->dir_y
+		if (!map[(int)(player->pos_y - player->dir_y
 				* player->move_speed)][(int)player->pos_x])
 			player->pos_y -= player->dir_y * player->move_speed;
 	}
@@ -86,8 +86,8 @@ void	hook(void *param)
 	player = &app->player;
 	if (mlx_is_key_down(app->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(app->mlx);
-	handle_w_s_keys(app->mlx, player);
-	handle_q_d_keys(app->mlx, player);
+	handle_w_s_keys(app->map, app->mlx, player);
+	handle_q_d_keys(app->map, app->mlx, player);
 	handle_left_right_keys(app->mlx, player);
 	clear_image(app);
 	render(app);

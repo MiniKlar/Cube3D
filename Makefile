@@ -6,7 +6,7 @@
 #    By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 19:15:37 by lomont            #+#    #+#              #
-#    Updated: 2025/11/11 15:35:36 by lomont           ###   ########.fr        #
+#    Updated: 2025/11/11 16:17:29 by lomont           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ BREW_PREFIX			= $(shell brew --prefix 2>/dev/null || echo /opt/homebrew)
 CLINKS				= -L$(BREW_PREFIX)/lib -ldl -lglfw -pthread -lm
 
 MLX_INCLUDES		= -I $(MLX) -I $(LIB_C)
-CFLAGS				= -Wall -g -Wextra -Werror $(MLX_INCLUDES)
+CFLAGS				= -Wall -g -Wextra -Werror $(MLX_INCLUDES) -I ./includes
 CLINKS				= -ldl -lglfw -pthread -lm
 
 MLX_GIT_URL			= git@github.com:MiniKlar/MLX42.git
@@ -38,6 +38,7 @@ SRC_FILES			= main.c \
 						utils/check_line.c \
 						utils/error.c \
 						utils/init_free.c \
+						utils/rgba.c \
 						config_validity/helpers_correct_file.c \
 						config_validity/helpers_validate_config.c \
 						config_validity/parse_config.c \
@@ -46,12 +47,10 @@ SRC_FILES			= main.c \
 						map_validity/helpers_player_char.c \
 						map_validity/helpers_store_map.c \
 						map_validity/parse_map.c \
-						main.c \
 						handle_image.c \
 						init.c \
 						raycasting.c \
 						raycasting_calcul.c \
-						utils.c \
 						draw.c \
 						key.c \
 						fps.c \
