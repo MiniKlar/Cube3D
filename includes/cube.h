@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:38:27 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/11 16:18:03 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 16:55:33 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # endif
 
 # ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 1920
+#  define SCREEN_WIDTH 1080
 # endif
 
 # ifndef SCREEN_HEIGHT
-#  define SCREEN_HEIGHT 1080
+#  define SCREEN_HEIGHT 720
 # endif
 
 # ifndef TEXTURE_WIDTH
@@ -126,6 +126,7 @@ void		frametime(t_app *app, int fps);
 void		hook(void* param);
 void		init_player_direction(t_app *app);
 uint32_t	get_rgba(uint8_t r, uint8_t g, uint8_t b);
+bool		init_mlx(t_app *app);
 
 //PARSING
 

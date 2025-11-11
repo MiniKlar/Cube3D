@@ -6,11 +6,11 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:43:02 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 16:34:00 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 19:14:24 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "cube.h"
 
 bool	parsing(t_app *app, char *file)
 {
@@ -25,7 +25,7 @@ bool	parsing(t_app *app, char *file)
 		error_exit(app, "The map is missing after the configuration");
 	parse_map(app, fd, first_line_map);
 	close(fd);
-	return (printf("End of Parsing\n"), 0);
+	return (0);
 }
 
 void	print_map(t_app *app)
@@ -54,7 +54,7 @@ void	print_map(t_app *app)
 
 int	main(int ac, char **av)
 {
-	t_app		app;
+	t_app	app;
 
 	if (ac == 2)
 	{
@@ -62,7 +62,8 @@ int	main(int ac, char **av)
 			return (1);
 		if (!parsing(&app, av[1]))
 		{
-			if (!init_mlx(app))
+			print_map(&app);
+			if (init_mlx(&app))
 			{
 				init_player_direction(&app);
 				create_image(&app);

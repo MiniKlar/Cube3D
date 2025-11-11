@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 02:57:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/11 16:20:03 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 19:13:31 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ static void	handle_q_d_keys(char **map, mlx_t *mlx, t_player *player)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
-		if (!map[(int)player->pos_y][(int)(player->pos_x + player->plane_x
-			* player->move_speed)])
+		if (map[(int)player->pos_y][(int)(player->pos_x + player->plane_x
+			* player->move_speed)] == 48)
 			player->pos_x += player->plane_x * player->move_speed;
-		if (!map[(int)(player->pos_y + player->plane_y
-				* player->move_speed)][(int)player->pos_x])
+		if (map[(int)(player->pos_y + player->plane_y
+				* player->move_speed)][(int)player->pos_x] == 48)
 			player->pos_y += player->plane_y * player->move_speed;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_Q))
 	{
-		if (!map[(int)player->pos_y][(int)(player->pos_x - player->plane_x
-			* player->move_speed)])
+		if (map[(int)player->pos_y][(int)(player->pos_x - player->plane_x
+			* player->move_speed)] == 48)
 			player->pos_x -= player->plane_x * player->move_speed;
-		if (!map[(int)(player->pos_y - player->plane_y
-				* player->move_speed)][(int)player->pos_x])
+		if (map[(int)(player->pos_y - player->plane_y
+				* player->move_speed)][(int)player->pos_x] == 48)
 			player->pos_y -= player->plane_y * player->move_speed;
 	}
 }
@@ -59,20 +59,20 @@ static void	handle_w_s_keys(char **map, mlx_t *mlx, t_player *player)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
-		if (!map[(int)player->pos_y][(int)(player->pos_x + player->dir_x
-			* player->move_speed)])
+		if (map[(int)player->pos_y][(int)(player->pos_x + player->dir_x
+			* player->move_speed)] == 48)
 			player->pos_x += player->dir_x * player->move_speed;
-		if (!map[(int)(player->pos_y + player->dir_y
-				* player->move_speed)][(int)player->pos_x])
+		if (map[(int)(player->pos_y + player->dir_y
+				* player->move_speed)][(int)player->pos_x] == 48)
 			player->pos_y += player->dir_y * player->move_speed;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
-		if (!map[(int)player->pos_y][(int)(player->pos_x - player->dir_x
-			* player->move_speed)])
+		if (map[(int)player->pos_y][(int)(player->pos_x - player->dir_x
+			* player->move_speed)] == 48)
 			player->pos_x -= player->dir_x * player->move_speed;
-		if (!map[(int)(player->pos_y - player->dir_y
-				* player->move_speed)][(int)player->pos_x])
+		if (map[(int)(player->pos_y - player->dir_y
+				* player->move_speed)][(int)player->pos_x] == 48)
 			player->pos_y -= player->dir_y * player->move_speed;
 	}
 }

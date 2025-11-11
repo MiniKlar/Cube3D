@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:18 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 16:02:10 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 18:49:02 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	set_player_pos(t_app *app, char **grid, int x, int y)
 {
 	app->player.pos_x = (double)x + 0.5;
 	app->player.pos_y = (double)y + 0.5;
-	app->player.start_direction = grid[y][x];
+	app->direction = grid[y][x];
 	grid[y][x] = '0';
 }

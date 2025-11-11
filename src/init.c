@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 00:41:15 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/11 16:33:20 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/11 16:47:33 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ void	init_player_direction(t_app *app)
 	player->rot_speed = 0.03;
 }
 
-static bool	init_mlx(t_app *app)
+bool	init_mlx(t_app *app)
 {
 	app->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cube3D", true);
-	if (!app->mlx)
+	if (!app->mlx){
 		return (false);
+	}
 	return (true);
 }
 
