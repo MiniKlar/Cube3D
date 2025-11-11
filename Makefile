@@ -6,41 +6,58 @@
 #    By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 19:15:37 by lomont            #+#    #+#              #
-#    Updated: 2025/11/11 15:28:19 by lomont           ###   ########.fr        #
+#    Updated: 2025/11/11 15:35:36 by lomont           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 			= cube3D
+NAME				= cube3D
 
 CC					= cc
 RM					= rm -f
 CLONE				= git clone --depth=1
 
-CFLAGS 			= -Wall -Wextra -Werror -DSHOW_FPS=1
-## On macOS with Homebrew GLFW, the library lives in the Homebrew lib dir
-## Detect Homebrew prefix (works when brew is installed) and add it to the
-## linker search path so -lglfw can be resolved.
-BREW_PREFIX		= $(shell brew --prefix 2>/dev/null || echo /opt/homebrew)
-CLINKS			= -L$(BREW_PREFIX)/lib -ldl -lglfw -pthread -lm
+SRC_DIR				= src
+OBJ_DIR				= objet
+
+BREW_PREFIX			= $(shell brew --prefix 2>/dev/null || echo /opt/homebrew)
+CLINKS				= -L$(BREW_PREFIX)/lib -ldl -lglfw -pthread -lm
+
+MLX_INCLUDES		= -I $(MLX) -I $(LIB_C)
+CFLAGS				= -Wall -g -Wextra -Werror $(MLX_INCLUDES)
+CLINKS				= -ldl -lglfw -pthread -lm
 
 MLX_GIT_URL			= git@github.com:MiniKlar/MLX42.git
 MLX					= MLX42
 LIBMLX				= $(MLX)/libmlx42.a
 
-LIB_C_GIT_URL 	= git@github.com:MiniKlar/LIB_C.git
-LIB_C			= LIB_C
+LIB_C_GIT_URL		= git@github.com:MiniKlar/LIB_C.git
+LIB_C				= LIB_C
+LIB_C_A				= $(LIB_C)/LIB_C.a
 
-SRC 			= ./src/main.c \
-					./src/handle_image.c \
-					./src/init.c \
-					./src/raycasting.c \
-					./src/raycasting_calcul.c \
-					./src/utils.c \
-					./src/draw.c \
-					./src/key.c \
-					./src/fps.c \
+SRC_FILES			= main.c \
+						utils/check_line.c \
+						utils/error.c \
+						utils/init_free.c \
+						config_validity/helpers_correct_file.c \
+						config_validity/helpers_validate_config.c \
+						config_validity/parse_config.c \
+						map_validity/helpers_fullfill.c \
+						map_validity/helpers_grid.c \
+						map_validity/helpers_player_char.c \
+						map_validity/helpers_store_map.c \
+						map_validity/parse_map.c \
+						main.c \
+						handle_image.c \
+						init.c \
+						raycasting.c \
+						raycasting_calcul.c \
+						utils.c \
+						draw.c \
+						key.c \
+						fps.c \
 
-OBJ 			= $(SRC:.c=.o)
+SRC					= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJ					= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(NAME)
 
@@ -90,11 +107,4 @@ clear: fclean
 
 re: fclean all
 
-leak: CFLAGS += -g
-leak: re
-	leaks --atExit -- ./$(NAME)
-
-test:
-	g++ test.cpp quickcg.cpp `sdl-config --cflags --libs` -o test
-
-.PHONY:	all bonus clear clean fclean re
+.PHONY: all bonus clear clean fclean re

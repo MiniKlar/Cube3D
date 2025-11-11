@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:43:23 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 13:36:05 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:33:20 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "../MLX42/mlx42.h"
 # include "../LIB_C/LIB_C.h"
 
-# define WIN_WIDTH  1080
-# define WIN_HEIGHT 920
 # define CONFIG_COUNT 6
 
 typedef struct s_textures
