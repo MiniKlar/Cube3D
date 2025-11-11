@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:43:23 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 13:36:05 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:09:40 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void		parse_map(t_data *data, int fd, char *first_line_map);
 // main
 
 bool		parsing(t_data *data, char *file);
+void		print_map(t_data *data);
 
 #endif

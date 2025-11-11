@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:11 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 13:35:13 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:09:59 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	flood_fill(t_data *data, char **grid, int x, int y)
 	if (grid[y][x] == '1' || grid[y][x] == 'V')
 		return ;
 	if (grid[y][x] == ' ')
+	{
+		print_map(data);
 		error_exit_1(data, "Player's room touches empty space.", grid);
+	}
 	if (grid[y][x] == '0')
 		grid[y][x] = 'V';
 	else

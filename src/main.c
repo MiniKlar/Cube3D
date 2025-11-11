@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:43:02 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 13:41:19 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:26:06 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int ac, char **av)
 		init_data(&data);
 		if (!parsing(&data, av[1]))
 		{
-			// print_map(&data);
+			print_map(&data);
 			data.game = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3D", true);
 			if (!data.game)
 				return (1);
