@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:15 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/10 19:10:56 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:10:41 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*strtrim_end_nl(char *line)
 	while (len > 0)
 	{
 		if (line[len - 1] == '\n' || line[len - 1] == ' '
-			|| line[len - 1] == '\t' || line[len - 1] == (char)160)
+			|| line[len - 1] == '\t')
 			len--;
 		else
 			break ;

@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:11 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/10 19:10:59 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:35:13 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ void	launch_flood_fill_from_player(t_data *data, char **grid)
 	start_x = (int)data->player.pos_x;
 	start_y = (int)data->player.pos_y;
 	if (start_y < 0 || start_y >= data->map_height)
-		error_exit_1(data, "Player start Y is out of map bounds.", grid);
+		error_exit_1(data, "Player start Y is out of map.", grid);
 	if (start_x < 0 || start_x >= (int)ft_strlen(grid[start_y]))
-		error_exit_1(data, "Player start X is out of map bounds.", grid);
-	if (grid[start_y][start_x] == '1')
-		error_exit_1(data, "Player starts inside a wall.", grid);
+		error_exit_1(data, "Player start X is out of map.", grid);
 	flood_fill(data, grid, start_x, start_y);
 }
 

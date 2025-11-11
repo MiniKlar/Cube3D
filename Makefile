@@ -23,9 +23,9 @@ SRC_FILES			= main.c \
 						utils/check_line.c \
 						utils/error.c \
 						utils/init_free.c \
-						config_validity/correct_file.c \
+						config_validity/helpers_correct_file.c \
+						config_validity/helpers_validate_config.c \
 						config_validity/parse_config.c \
-						config_validity/validate_config.c \
 						map_validity/helpers_fullfill.c \
 						map_validity/helpers_grid.c \
 						map_validity/helpers_player_char.c \

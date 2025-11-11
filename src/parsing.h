@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:43:23 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/10 19:16:16 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:36:05 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,7 @@ bool		is_player_char(char c);
 void		set_player_pos(t_data *data, char **grid, int x, int y);
 
 int			get_max_width(char **grid);
-char		*pad_line(char *line, int target_width);
-void		rectangularize_and_store(t_data *data, char **temp_grid, int rows);
-void		store_and_clean_map(t_data *data, char **temp_grid, int rows);
+void		store_map(t_data *data, char **temp_grid, int rows);
 
 char		**assemble_grid(t_data *data, int fd, char *first_line, int *rows);
 void		validate_chars_and_player(t_data *data, char **grid, int rows);

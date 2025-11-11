@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:43:02 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/10 18:43:03 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:41:19 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_map(t_data *data)
 	int	y;
 
 	printf("--- MAP DEBUG PRINT ---\n");
-	printf("Dimensions: %d x %d (Width x Height)\n", 
+	printf("Dimensions: %d x %d (Width x Height)\n",
 		data->map_width, data->map_height);
 	printf("Player Start Pos: (%.1f, %.1f) Direction: %c\n",
 		data->player.pos_x, data->player.pos_y, data->player.start_direction);
@@ -54,18 +54,19 @@ void	print_map(t_data *data)
 
 int	main(int ac, char **av)
 {
-	t_data	data;
+	t_data		data;
+	mlx_image_t	*img;
 
 	if (ac == 2)
 	{
 		init_data(&data);
 		if (!parsing(&data, av[1]))
 		{
-			print_map(&data);
+			// print_map(&data);
 			data.game = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3D", true);
 			if (!data.game)
 				return (1);
-			mlx_image_t	*img = mlx_new_image(data.game, 256, 256);
+			img = mlx_new_image(data.game, 256, 256);
 			if (!img || (mlx_image_to_window(data.game, img, 0, 0) < 0))
 				return (2);
 			mlx_put_pixel(img, 0, 0, 0xFF0000FF);

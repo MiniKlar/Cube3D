@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:23 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/10 19:18:05 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:38:22 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ char	**assemble_grid(t_data *data, int fd, char *first_line, int *rows)
 			break ;
 		if (is_line_empty(line) && is_map_started(grid))
 			error_exit_2(data, "Empty line inside map data.", grid, line);
-		if (is_line_empty(line))
-		{
-			free(line);
-			continue ;
-		}
 		grid = realloc_grid(data, grid, i + 1);
 		grid[i] = strtrim_end_nl(line);
 		free(line);
@@ -92,6 +87,6 @@ void	parse_map(t_data *data, int fd, char *first_line_map)
 
 	temp_grid = assemble_grid(data, fd, first_line_map, &rows);
 	validate_chars_and_player(data, temp_grid, rows);
-	store_and_clean_map(data, temp_grid, rows);
+	store_map(data, temp_grid, rows);
 	check_map_closure(data);
 }
