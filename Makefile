@@ -6,7 +6,7 @@
 #    By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 19:15:37 by lomont            #+#    #+#              #
-#    Updated: 2025/11/11 16:17:29 by lomont           ###   ########.fr        #
+#    Updated: 2025/11/12 21:13:03 by lomont           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ BREW_PREFIX			= $(shell brew --prefix 2>/dev/null || echo /opt/homebrew)
 CLINKS				= -L$(BREW_PREFIX)/lib -ldl -lglfw -pthread -lm
 
 MLX_INCLUDES		= -I $(MLX) -I $(LIB_C)
-CFLAGS				= -Wall -g -Wextra -Werror $(MLX_INCLUDES) -I ./includes
+CFLAGS				= -Wall -g -Wextra -Werror $(MLX_INCLUDES) -I ./includes -g
 CLINKS				= -ldl -lglfw -pthread -lm
 
 MLX_GIT_URL			= git@github.com:MiniKlar/MLX42.git
