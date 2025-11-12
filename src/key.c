@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 02:57:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/11 19:13:31 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 21:11:01 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	handle_left_right_keys(mlx_t *mlx, t_player *player)
 	double	old_plane_x;
 	double	rot_speed;
 
+	rot_speed = 0;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		rot_speed = -player->rot_speed;
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))

@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 22:18:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/12 20:57:25 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 21:11:28 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	calcul_direction(t_app *app)
 	t_ray	*ray;
 
 	ray = &app->ray;
-	i = 0; // Default to a valid index
 	if (ray->side == 0) // Mur Est ou Ouest
 	{
 		if (ray->ray_dir_x > 0)
