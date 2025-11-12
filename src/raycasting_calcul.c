@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 22:18:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/11 19:14:54 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 04:27:23 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	calcul_if_wall_hitted(t_app *app)
 			ray->side_dist_y += ray->delta_y;
 			ray->map_y += ray->step_y;
 			ray->side = 1;
-		}
 		}
 		if (app->map[ray->map_y][ray->map_x] > 48) {
 			ray->hit = 1;

@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 00:41:15 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/11 16:47:33 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 04:38:52 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	init_player_direction(t_app *app)
 	set_player_no_so_position(app, player);
 	if (app->direction == 'E')
 	{
-		player->dir_x = -1.0;
+		player->dir_x = 1.0;
 		player->dir_y = 0;
 		player->plane_x = 0;
 		player->plane_y = 0.66;
 	}
 	else if (app->direction == 'W')
 	{
-		player->dir_x = 1.0;
+		player->dir_x = -1.0;
 		player->dir_y = 0;
 		player->plane_x = 0;
 		player->plane_y = -0.66;
