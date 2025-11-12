@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:32:12 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/12 21:48:26 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 22:30:18 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	error_exit_1(t_app *app, char *msg, char **tab)
 {
 	free_tab(tab);
-	error_exit(app, msg, 0);
+	error_exit(app, msg, -1);
 }
 
 void	error_exit_2(t_app *app, char *msg, char **tab, char *tab_2)
 {
 	free_tab(tab);
 	free(tab_2);
-	error_exit(app, msg, 0);
+	error_exit(app, msg, -1);
 }
 
 void	error_exit(t_app *app, char *msg, int fd)
