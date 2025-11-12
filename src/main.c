@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:43:02 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 19:14:24 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 21:46:42 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ bool	parsing(t_app *app, char *file)
 	char	*first_line_map;
 
 	if (!cub_extension(file))
-		error_exit(app, "File must end with <.cub>");
+		error_exit(app, "File must end with <.cub>", -1);
 	fd = readable_map_file(file);
 	first_line_map = parse_config(app, fd);
 	if (!first_line_map)
-		error_exit(app, "The map is missing after the configuration");
+		error_exit(app, "The map is missing after the configuration", fd);
 	parse_map(app, fd, first_line_map);
 	close(fd);
 	return (0);

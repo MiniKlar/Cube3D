@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:29 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/12 21:40:11 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 21:45:40 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_clean_line(t_app *app, int fd, char **line_ptr)
 
 	*line_ptr = get_next_line(fd);
 	if (!*line_ptr)
-		error_exit(app, "Incomplete file.");
+		error_exit(app, "Incomplete file.", -1);
 	if (is_line_empty(*line_ptr))
 		return (free(*line_ptr), NULL);
 	trimmed_line = strtrim_start(*line_ptr);
@@ -65,7 +65,7 @@ char	*find_first_map_line(t_app *app, int fd)
 		line = get_next_line(fd);
 	}
 	if (!line)
-		error_exit(app, "The map is missing after the configuration.");
+		error_exit(app, "The map is missing after the configuration.", -1);
 	cleaned_line = strtrim_end_nl(line);
 	free(line);
 	return (cleaned_line);
@@ -111,7 +111,7 @@ char	*parse_config(t_app *app, int fd)
 			continue ;
 		verif = extract_value(app, trimmed_line, &found_count, success);
 		if (verif != 0)
-			correct_error(app, verif, trimmed_line, line);
+			correct_error(app, verif, trimmed_line, line, -1);
 		free(line);
 	}
 	return (find_first_map_line(app, fd));

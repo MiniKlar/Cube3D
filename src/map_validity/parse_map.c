@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:23 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 19:15:02 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 21:47:51 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**assemble_grid(t_app *app, int fd, char *first_line, int *rows)
 	i = 1;
 	grid = ft_calloc(2, sizeof(char *));
 	if (!grid)
-		error_exit(app, "Grid memory fail.");
+		error_exit(app, "Grid memory fail.", -1);
 	grid[0] = first_line;
 	while (1)
 	{
@@ -75,7 +75,7 @@ void	check_map_closure(t_app *app)
 
 	test_grid = copy_grid(app);
 	if (!test_grid)
-		error_exit(app, "Failed to allocate memory for test grid.");
+		error_exit(app, "Failed to allocate memory for test grid.", -1);
 	launch_flood_fill_from_player(app, test_grid);
 	free_tab(test_grid);
 }

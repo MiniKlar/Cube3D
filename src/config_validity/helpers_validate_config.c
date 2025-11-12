@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:26 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 16:13:11 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 21:46:32 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ uint32_t	rgb_to_uint(t_app *app, char *rgb_str)
 	if (!parts || array_len(parts) != 3)
 	{
 		free_tab(parts);
-		error_exit(app, "Invalid Color Format (R/G/B).");
+		error_exit(app, "Invalid Color Format (R/G/B).", -1);
 	}
 	r = ft_atoi(parts[0]);
 	g = ft_atoi(parts[1]);
 	b = ft_atoi(parts[2]);
 	free_tab(parts);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		error_exit(app, "RGB values are not between [0-255].");
+		error_exit(app, "RGB values are not between [0-255].", -1);
 	color = (r << 24) | (g << 16) | (b << 8) | 0xFF;
 	return (color);
 }
@@ -48,7 +48,7 @@ bool	validate_color(t_app *app, char *rgb_str, char *trimmed)
 	if (*target != 0)
 	{
 		free(trimmed);
-		error_exit(app, "Color already defined.");
+		error_exit(app, "Color already defined.", -1);
 	}
 	*target = rgb_to_uint(app, rgb_str);
 	if (*target)
@@ -79,20 +79,20 @@ bool	validate_texture(t_app *app, char *path_str, char *trimmed)
 	{
 		free(path_str);
 		free(trimmed);
-		error_exit(app, "Identifier already defined.");
+		error_exit(app, "Identifier already defined.", -1);
 	}
 	if (!path_str || ft_strlen(path_str) == 0)
-		error_exit(app, "Missing texture path.");
+		error_exit(app, "Missing texture path.", -1);
 	fd = open(path_str, O_RDONLY);
 	if (fd < 0)
 	{
 		free(path_str);
 		free(trimmed);
-		error_exit(app, "Unreadable texture.");
+		error_exit(app, "Unreadable texture.", -1);
 	}
 	close(fd);
 	*target_ptr = ft_strdup(path_str);
 	if (!*target_ptr)
-		error_exit(app, "Memory Allocation failled for the path.");
+		error_exit(app, "Memory Allocation failled for the path.", -1);
 	return (1);
 }
