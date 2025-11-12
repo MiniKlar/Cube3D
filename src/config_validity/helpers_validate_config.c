@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_validate_config.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
+/*   By: miniklar <miniklar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:26 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/12 21:46:32 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 21:56:18 by miniklar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ bool	validate_texture(t_app *app, char *path_str, char *trimmed)
 		error_exit(app, "Identifier already defined.", -1);
 	}
 	if (!path_str || ft_strlen(path_str) == 0)
-		error_exit(app, "Missing texture path.", -1);
+		error_exit(app, "Missing texture path.", app->fd);
 	fd = open(path_str, O_RDONLY);
 	if (fd < 0)
 	{

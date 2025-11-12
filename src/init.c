@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
+/*   By: miniklar <miniklar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 00:41:15 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/12 04:38:52 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 22:00:08 by miniklar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ bool	init_app(t_app *app)
 		return (false);
 	ft_bzero(app, sizeof(t_app));
 	app->time = mlx_get_time();
+	app->fd = -1;
 	return (true);
 }

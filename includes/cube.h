@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
+/*   By: miniklar <miniklar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:38:27 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/12 21:40:27 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 21:57:01 by miniklar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_app
 	mlx_texture_t	*textures[4];
 	uint32_t		ceiling;
 	uint32_t		floor;
+	int				fd;
 	int				x;
 	int				map_width;
 	int				map_height;

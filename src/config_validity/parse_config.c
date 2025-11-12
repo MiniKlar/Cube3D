@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
+/*   By: miniklar <miniklar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:29 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/12 21:45:40 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 21:59:29 by miniklar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ void	correct_error(t_app *app, int error, char *trimmed, char *line, int fd)
 		error_exit(app, "missing configuration identifier.", fd);
 	}
 	else if (error == 2)
-		error_exit(app, "Missing texture path.", fd);
+		error_exit(app, "Missing texture path.", app->fd);
 	else if (error == 3)
 	{
 		free(line);
-		error_exit(app, "Missing texture path.", fd);
+		error_exit(app, "Missing texture path.", app->fd);
 	}
 	else if (error == 4)
 	{
