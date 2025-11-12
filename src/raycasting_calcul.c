@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 22:18:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/12 04:27:23 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 20:57:25 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,20 @@ void	calcul_direction(t_app *app)
 	t_ray	*ray;
 
 	ray = &app->ray;
-	i = -1;
-	if (ray->side == 0 && ray->ray_dir_x < 0)
-		i = 0;
-	else if (ray->side == 1 && ray->ray_dir_y < 0)
-		i = 1;
-	else if (ray->side == 1 && ray->ray_dir_y > 0)
-		i = 2;
-	else if (ray->side == 0 && ray->ray_dir_x > 0)
-		i = 3;
+	i = 0; // Default to a valid index
+	if (ray->side == 0) // Mur Est ou Ouest
+	{
+		if (ray->ray_dir_x > 0)
+			i = 3; // Mur Ouest
+		else
+			i = 0; // Mur Est
+	}
+	else // Mur Nord ou Sud
+	{
+		if (ray->ray_dir_y > 0)
+			i = 2; // Mur Sud
+		else
+			i = 1; // Mur Nord
+	}
 	ray->texture_index = i;
 }

@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 01:40:09 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/11 16:18:17 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 20:59:29 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ static void	draw_texture(t_app *app)
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		tex_y = (int)ray->texture_pos & (TEXTURE_HEIGHT - 1);
+		tex_y = (int)ray->texture_pos;
+		if (tex_y < 0)
+			tex_y = 0;
+		if (tex_y >= TEXTURE_HEIGHT)
+			tex_y = TEXTURE_HEIGHT - 1;
 		ray->texture_pos += ray->step;
 		mlx_put_pixel(app->img, app->x, y, texture_color(app, i, tex_y, tex_x));
 		y++;

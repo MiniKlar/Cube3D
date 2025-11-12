@@ -6,11 +6,25 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:42:58 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 16:12:50 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 20:35:15 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+static void	free_mlx_texture(mlx_texture_t *textures[4])
+{
+	size_t	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (textures[i])
+			mlx_delete_texture(textures[i]);
+		i++;
+	}
+	return ;
+}
 
 void	free_app(t_app *app)
 {
@@ -25,6 +39,7 @@ void	free_app(t_app *app)
 		free(app->tex.east_path);
 	if (app->tex.west_path)
 		free(app->tex.west_path);
+	free_mlx_texture(app->textures);
 	if (app->map)
 	{
 		while (i < app->map_height)
