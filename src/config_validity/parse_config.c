@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:29 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 16:01:23 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/12 21:40:11 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,24 @@ char	*find_first_map_line(t_app *app, int fd)
 	return (cleaned_line);
 }
 
-void	correct_error(t_app *app, int error, char *trimmed, char *line)
+void	correct_error(t_app *app, int error, char *trimmed, char *line, int fd)
 {
 	if (error == 1)
 	{
 		free(line);
-		error_exit(app, "missing configuration identifier.");
+		error_exit(app, "missing configuration identifier.", fd);
 	}
 	else if (error == 2)
-		error_exit(app, "Missing texture path.");
+		error_exit(app, "Missing texture path.", fd);
 	else if (error == 3)
 	{
 		free(line);
-		error_exit(app, "Missing texture path.");
+		error_exit(app, "Missing texture path.", fd);
 	}
 	else if (error == 4)
 	{
 		free(line);
-		error_exit(app, "Wrong format or missing value.");
+		error_exit(app, "Wrong format or missing value.", fd);
 	}
 	(void)trimmed;
 }
