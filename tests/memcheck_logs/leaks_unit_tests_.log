@@ -1,0 +1,49 @@
+→ is_line_empty handles blank and non-blank
+  ✓ ok
+→ strtrim_start removes leading spaces
+  ✓ ok
+→ array_len counts array entries
+  ✓ ok
+→ get_rgba packs RGB values
+  ✓ ok
+→ is_valid_char recognises map characters
+  ✓ ok
+→ is_player_char detects player markers
+  ✓ ok
+→ set_player_pos centers player and clears tile
+  ✓ ok
+→ strtrim_end_nl trims trailing whitespace
+  ✓ ok
+→ get_max_width finds widest row
+  ✓ ok
+→ is_map_started checks first row
+  ✓ ok
+→ realloc_grid grows grid without data loss
+  ✓ ok
+→ store_map updates app metadata
+  ✓ ok
+→ rgb_to_uint converts decimal triplet
+  ✓ ok
+→ rgb_to_uint rejects wrong format
+  ✓ ok
+→ rgb_to_uint rejects out of range
+  ✓ ok
+→ validate_color stores floor and ceiling colors
+  ✓ ok
+→ validate_color detects duplicates
+  ✓ ok
+→ validate_texture stores path
+  ✓ ok
+→ validate_texture detects duplicates
+  ✓ ok
+→ validate_texture requires path
+  ✓ ok
+→ validate_texture rejects unreadable path
+  ✓ ok
+
+21 unit tests passed.
+Process 17747 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
+
+Process 17747: 188 nodes malloced for 16 KB
+Process 17747: 0 leaks for 0 total leaked bytes.
+

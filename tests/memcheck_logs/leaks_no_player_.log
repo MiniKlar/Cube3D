@@ -1,0 +1,6 @@
+Error : Map must contain one player position.
+Process 17868 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
+
+Process 17868: 957 nodes malloced for 104 KB
+Process 17868: 0 leaks for 0 total leaked bytes.
+

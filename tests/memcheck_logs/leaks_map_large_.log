@@ -1,0 +1,6 @@
+Error : Invalid character in map.
+Process 13579 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
+
+Process 13579: 956 nodes malloced for 104 KB
+Process 13579: 0 leaks for 0 total leaked bytes.
+

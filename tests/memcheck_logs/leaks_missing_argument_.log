@@ -1,0 +1,6 @@
+Error : Usage : ./Cube3d <map.cub>
+Process 17812 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
+
+Process 17812: 955 nodes malloced for 99 KB
+Process 17812: 0 leaks for 0 total leaked bytes.
+
