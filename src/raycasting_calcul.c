@@ -6,9 +6,10 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 22:18:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/13 01:01:27 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 03:54:10 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cube.h"
 
@@ -115,9 +116,9 @@ void	calcul_direction(t_app *app)
 	if (ray->side == 0)
 	{
 		if (ray->ray_dir_x > 0)
-			i = 3;
-		else
 			i = 0;
+		else
+			i = 3;
 	}
 	else
 	{
