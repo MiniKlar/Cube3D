@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miniklar <miniklar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:38:27 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/12 21:57:01 by miniklar         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:38:26 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void		free_tab(char **tab);
 
 void		error_exit_1(t_app *app, char *msg, char **tab);
 void		error_exit_2(t_app *app, char *msg, char **tab, char *tab_2);
-void		error_exit(t_app *app, char *msg, int fd);
+void		error_exit(t_app *app, char *msg);
 
 void		free_app(t_app *app);
 
