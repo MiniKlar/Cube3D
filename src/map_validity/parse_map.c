@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
+/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:23 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/13 12:09:55 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 17:40:48 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**assemble_grid(t_app *app, int fd, char *first_line, int *rows)
 		if (!line)
 			break ;
 		if (is_line_empty(line) && is_map_started(grid))
-			error_exit_2(app, "Empty line inside map app.", grid, line);
+			error_exit_2(app, "Empty line inside map.", grid, line);
 		grid = realloc_grid(app, grid, i + 1);
 		grid[i] = strtrim_end_nl(line);
 		free(line);
