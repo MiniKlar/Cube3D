@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miniklar <miniklar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 00:41:15 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/12 22:00:08 by miniklar         ###   ########.fr       */
+/*   Updated: 2025/11/13 01:00:57 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ void	init_player_direction(t_app *app)
 bool	init_mlx(t_app *app)
 {
 	app->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cube3D", true);
-	if (!app->mlx){
+	if (!app->mlx)
 		return (false);
-	}
 	return (true);
 }
 

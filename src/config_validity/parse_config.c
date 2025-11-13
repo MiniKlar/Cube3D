@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miniklar <miniklar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:29 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/12 21:59:29 by miniklar         ###   ########.fr       */
+/*   Updated: 2025/11/13 01:00:26 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ char	*find_first_map_line(t_app *app, int fd)
 	return (cleaned_line);
 }
 
-void	correct_error(t_app *app, int error, char *trimmed, char *line, int fd)
+void	correct_error(t_app *app, int error, char *trimmed, char *line)
 {
 	if (error == 1)
 	{
 		free(line);
-		error_exit(app, "missing configuration identifier.", fd);
+		error_exit(app, "missing configuration identifier.", app->fd);
 	}
 	else if (error == 2)
 		error_exit(app, "Missing texture path.", app->fd);
@@ -88,7 +88,7 @@ void	correct_error(t_app *app, int error, char *trimmed, char *line, int fd)
 	else if (error == 4)
 	{
 		free(line);
-		error_exit(app, "Wrong format or missing value.", fd);
+		error_exit(app, "Wrong format or missing value.", app->fd);
 	}
 	(void)trimmed;
 }
@@ -111,7 +111,7 @@ char	*parse_config(t_app *app, int fd)
 			continue ;
 		verif = extract_value(app, trimmed_line, &found_count, success);
 		if (verif != 0)
-			correct_error(app, verif, trimmed_line, line, -1);
+			correct_error(app, verif, trimmed_line, line);
 		free(line);
 	}
 	return (find_first_map_line(app, fd));
