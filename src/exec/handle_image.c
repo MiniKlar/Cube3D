@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 06:20:36 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/12 04:36:43 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 12:05:42 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	create_image(t_app *app)
 {
-	app->img = mlx_new_image(app->mlx, 1920, 1080);
+	app->img = mlx_new_image(app->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!app->img || (mlx_image_to_window(app->mlx, app->img, 0, 0) < 0))
 		exit(1);
 	app->textures[0] = mlx_load_png(app->tex.east_path);

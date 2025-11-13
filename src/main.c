@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:43:02 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/13 11:03:59 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 12:08:41 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ bool	parsing(t_app *app, char *file)
 	char	*first_line_map;
 
 	if (!cub_extension(file))
-		error_exit(app, "File must end with <.cub>", -1);
+		error_exit(app, "File must end with <.cub>");
 	fd = readable_map_file(file);
 	app->fd = fd;
 	first_line_map = parse_config(app, fd);
 	if (!first_line_map)
-		error_exit(app, "The map is missing after the configuration", fd);
+		error_exit(app, "The map is missing after the configuration");
 	parse_map(app, fd, first_line_map);
 	close(fd);
 	return (0);

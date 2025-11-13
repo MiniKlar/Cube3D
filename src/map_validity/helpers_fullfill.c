@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:11 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/12 21:47:13 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 12:09:50 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**copy_grid(t_app *app)
 
 	test_grid = ft_calloc(app->map_height + 1, sizeof(char *));
 	if (!test_grid)
-		error_exit(app, "Grid copy memory fail.", -1);
+		error_exit(app, "Grid copy memory fail.");
 	y = 0;
 	while (y < app->map_height)
 	{

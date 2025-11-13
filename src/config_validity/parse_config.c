@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:29 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/13 01:00:26 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 12:09:38 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_clean_line(t_app *app, int fd, char **line_ptr)
 
 	*line_ptr = get_next_line(fd);
 	if (!*line_ptr)
-		error_exit(app, "Incomplete file.", -1);
+		error_exit(app, "Incomplete file.");
 	if (is_line_empty(*line_ptr))
 		return (free(*line_ptr), NULL);
 	trimmed_line = strtrim_start(*line_ptr);
@@ -65,7 +65,7 @@ char	*find_first_map_line(t_app *app, int fd)
 		line = get_next_line(fd);
 	}
 	if (!line)
-		error_exit(app, "The map is missing after the configuration.", -1);
+		error_exit(app, "The map is missing after the configuration.");
 	cleaned_line = strtrim_end_nl(line);
 	free(line);
 	return (cleaned_line);
@@ -76,19 +76,19 @@ void	correct_error(t_app *app, int error, char *trimmed, char *line)
 	if (error == 1)
 	{
 		free(line);
-		error_exit(app, "missing configuration identifier.", app->fd);
+		error_exit(app, "missing configuration identifier.");
 	}
 	else if (error == 2)
-		error_exit(app, "Missing texture path.", app->fd);
+		error_exit(app, "Missing texture path.");
 	else if (error == 3)
 	{
 		free(line);
-		error_exit(app, "Missing texture path.", app->fd);
+		error_exit(app, "Missing texture path.");
 	}
 	else if (error == 4)
 	{
 		free(line);
-		error_exit(app, "Wrong format or missing value.", app->fd);
+		error_exit(app, "Wrong format or missing value.");
 	}
 	(void)trimmed;
 }
