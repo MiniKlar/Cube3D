@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:38:27 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/13 11:38:26 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 16:42:38 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,14 @@ typedef struct s_textures
 	char		*west_path;
 }	t_textures;
 
+typedef struct s_rgb
+{
+	int			r;
+	int			g;
+	int			b;
+	uint32_t	color;
+} t_rgb;
+
 typedef struct s_app
 {
 	mlx_t			*mlx;
@@ -109,6 +117,7 @@ typedef struct s_app
 	t_player		player;
 	t_ray			ray;
 	t_textures		tex;
+	t_rgb			rgb;
 }				t_app;
 
 //EXEC
@@ -133,6 +142,7 @@ bool		init_mlx(t_app *app);
 
 // utils/..
 
+int			is_only_digits(char *s);
 bool		is_line_empty(char *line);
 char		*strtrim_start(char *s);
 size_t		array_len(char **tab);
@@ -140,13 +150,14 @@ void		free_tab(char **tab);
 
 void		error_exit_1(t_app *app, char *msg, char **tab);
 void		error_exit_2(t_app *app, char *msg, char **tab, char *tab_2);
+void		error_exit_3(t_app *app, char **tab, char *tab_2, char *tab_3);
 void		error_exit(t_app *app, char *msg);
 
 void		free_app(t_app *app);
 
 // config_validity/..
 
-uint32_t	rgb_to_uint(t_app *app, char *rgb_str);
+uint32_t	rgb_to_uint(t_app *app, char *rgb_str, char *trimmed);
 bool		validate_color(t_app *app, char *rgb_str, char *trimmed);
 bool		validate_texture(t_app *app, char *path_str, char *trimmed);
 

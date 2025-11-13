@@ -1,12 +1,21 @@
 
+
+
+
 EA ./models/east_model.png
-WE ./models/west_model.png
-NO ./models/north_model.png
-SO ./models/south_model.png
-F 0,0,0
-C                       255,255,255       
+
+WE 						./models/west_model.png
+
+NO 							./models/north_model.png
+
+SO             ./models/south_model.png
+
+F 60 , 60 , 60
+C 125 ,  , 125
 
 1111111111111111111111111111
-100000N000000000000000000001
+10000000000000000000W0000001
 1000000000000000000000000001
 1111111111111111111111111111
+1 1
+111

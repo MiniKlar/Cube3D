@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:32:12 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/13 11:43:28 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 16:36:08 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ void	error_exit_2(t_app *app, char *msg, char **tab, char *tab_2)
 	free_tab(tab);
 	free(tab_2);
 	error_exit(app, msg);
+}
+
+void	error_exit_3(t_app *app, char **tab, char *tab_2, char *tab_3)
+{
+	empty_gnl(app);
+	free_tab(tab);
+	free(tab_2);
+	free(tab_3);
+	error_exit(app, "Invalid color value");
 }
 
 void	error_exit(t_app *app, char *msg)

@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   check_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
+/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:42:54 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 16:02:10 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 16:42:21 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+int	is_only_digits(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 bool	is_line_empty(char *line)
 {

@@ -3,37 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_validate_config.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
+/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:26 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/13 12:09:09 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 16:42:13 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-uint32_t	rgb_to_uint(t_app *app, char *rgb_str)
+bool	valid_int(char *part, int *out)
 {
-	int			r;
-	int			g;
-	int			b;
+	int	value;
+
+	if (!part || *part == '\0')
+		return (false);
+	if (!is_only_digits(part) || ft_strlen(part) > 3)
+		return (false);
+	value = ft_atoi(part);
+	if (value < 0 || value > 255)
+		return (false);
+	*out = value;
+	return (true);
+}
+
+uint32_t	rgb_to_uint(t_app *app, char *rgb_str, char *trimmed)
+{
+	t_rgb		rgb;
 	char		**parts;
-	uint32_t	color;
+	char		*tmp_part;
+	int			i;
 
 	parts = ft_split(rgb_str, ',');
 	if (!parts || array_len(parts) != 3)
+		error_exit_3(app, parts, rgb_str, trimmed);
+	i = 0;
+	while (parts[i])
 	{
-		free_tab(parts);
-		error_exit(app, "Invalid Color Format (R/G/B).");
+		tmp_part = parts[i];
+		parts[i] = ft_strtrim(tmp_part, " \t\n");
+		free(tmp_part);
+		i++;
 	}
-	r = ft_atoi(parts[0]);
-	g = ft_atoi(parts[1]);
-	b = ft_atoi(parts[2]);
+	if (!(valid_int(parts[0], &rgb.r)) || !(valid_int(parts[1], &rgb.g))
+		|| !(valid_int(parts[2], &rgb.b)))
+		error_exit_3(app, parts, rgb_str, trimmed);
 	free_tab(parts);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		error_exit(app, "RGB values are not between [0-255].");
-	color = (r << 24) | (g << 16) | (b << 8) | 0xFF;
-	return (color);
+	rgb.color = (rgb.r << 24) | (rgb.g << 16) | (rgb.b << 8) | 0xFF;
+	return (rgb.color);
 }
 
 bool	validate_color(t_app *app, char *rgb_str, char *trimmed)
@@ -50,7 +67,7 @@ bool	validate_color(t_app *app, char *rgb_str, char *trimmed)
 		free(trimmed);
 		error_exit(app, "Color already defined.");
 	}
-	*target = rgb_to_uint(app, rgb_str);
+	*target = rgb_to_uint(app, rgb_str, trimmed);
 	if (*target)
 		return (true);
 	return (false);
