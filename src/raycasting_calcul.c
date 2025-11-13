@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_calcul.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 22:18:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/13 03:54:10 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 11:09:13 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/cube.h"
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 02:57:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/13 03:50:14 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 11:05:45 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	handle_q_d_keys(char **map, mlx_t *mlx, t_player *player)
 				* player->move_speed)][(int)player->pos_x] == 48)
 			player->pos_y += player->plane_y * player->move_speed;
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_Q))
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
 		if (map[(int)player->pos_y][(int)(player->pos_x - player->plane_x
 			* player->move_speed)] == 48)
