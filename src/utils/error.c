@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:32:12 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/13 16:36:08 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/13 17:09:45 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	error_exit_3(t_app *app, char **tab, char *tab_2, char *tab_3)
 void	error_exit(t_app *app, char *msg)
 {
 	empty_gnl(app);
+	if (app->fd > 0)
+		close(app->fd);
 	printf("Error : %s\n", msg);
 	free_app(app);
 	exit(EXIT_FAILURE);
