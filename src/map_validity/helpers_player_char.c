@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_player_char.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
+/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:18 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/11 18:49:02 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/13 17:36:42 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	is_valid_char(char c)
 {
 	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (true);
-	if (c == ' ' || c == '\t')
+	if (c == ' ')
 		return (true);
 	return (false);
 }
