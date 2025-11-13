@@ -3,8 +3,8 @@ EA ./models/east_model.png
 WE ./models/west_model.png
 NO ./models/north_model.png
 SO ./models/south_model.png
-F 220,100,0
-C 255,30,0
+F 0,0,0
+C                       255,255,255       
 
 1111111111111111111111111111
 100000N000000000000000000001
