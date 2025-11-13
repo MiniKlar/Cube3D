@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+         #
+#    By: lomont <lomont@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 19:15:37 by lomont            #+#    #+#              #
-#    Updated: 2025/11/12 23:44:25 by lomont           ###   ########.fr        #
+#    Updated: 2025/11/13 11:16:54 by lomont           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,30 +18,10 @@ CLONE				= git clone --depth=1
 
 SRC_DIR				= src
 OBJ_DIR				= objet
-TEST_OBJ_DIR		= $(OBJ_DIR)/tests
-
-TEST_NAME	= cube3D_tests
-TEST_SRC_DIR		= tests
-TEST_SRC_FILES	= test_utils.c \
-				test_stubs.c
-TEST_SRC		= $(addprefix $(TEST_SRC_DIR)/, $(TEST_SRC_FILES))
-UNIT_TEST_SRC_FILES	= utils/check_line.c \
-					utils/rgba.c \
-					map_validity/helpers_player_char.c \
-					map_validity/helpers_grid.c \
-					map_validity/helpers_store_map.c \
-					config_validity/helpers_validate_config.c
-UNIT_TEST_SRC	= $(addprefix $(SRC_DIR)/, $(UNIT_TEST_SRC_FILES))
-TEST_SRCS		= $(TEST_SRC) $(UNIT_TEST_SRC)
-TEST_LDFLAGS	= -lm
-MEMCHECK_SCRIPT	= $(TEST_SRC_DIR)/run_memcheck.sh
-
-BREW_PREFIX			= $(shell brew --prefix 2>/dev/null || echo /opt/homebrew)
-CLINKS				= -L$(BREW_PREFIX)/lib -ldl -lglfw -pthread -lm
 
 MLX_INCLUDES		= -I $(MLX) -I $(LIB_C)
 CFLAGS				= -Wall -g -Wextra -Werror $(MLX_INCLUDES) -I ./includes -g
-# CLINKS				= -ldl -lglfw -pthread -lm
+CLINKS				= -ldl -lglfw -pthread -lm
 
 MLX_GIT_URL			= git@github.com:MiniKlar/MLX42.git
 MLX					= MLX42
@@ -64,13 +44,13 @@ SRC_FILES			= main.c \
 						map_validity/helpers_player_char.c \
 						map_validity/helpers_store_map.c \
 						map_validity/parse_map.c \
-						handle_image.c \
-						init.c \
-						raycasting.c \
-						raycasting_calcul.c \
-						draw.c \
-						key.c \
-						fps.c \
+						exec/handle_image.c \
+						exec/init.c \
+						exec/raycasting.c \
+						exec/raycasting_calcul.c \
+						exec/draw.c \
+						exec/key.c \
+						exec/fps.c \
 
 SRC					= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ					= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
