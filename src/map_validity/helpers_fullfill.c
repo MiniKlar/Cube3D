@@ -6,7 +6,7 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:16:11 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/13 17:37:14 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/14 12:45:44 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ void	flood_fill(t_app *app, char **grid, int x, int y)
 	int	max_y;
 
 	max_y = app->map_height;
+	if (y < 0 || y >= max_y)
+		error_exit_1(app, "Map is not fully enclosed: (Top/Bottom).", grid);
 	max_x = ft_strlen(grid[y]);
-	if (y < 0 || y >= max_y || x < 0 || x >= max_x)
-		error_exit_1(app, "Map is not fully enclosed.", grid);
+	if (x < 0 || x >= max_x)
+		error_exit_1(app, "Map is not fully enclosed: (Left/Right).", grid);
 	if (grid[y][x] == '1' || grid[y][x] == 'V')
 		return ;
 	if (grid[y][x] == ' ')

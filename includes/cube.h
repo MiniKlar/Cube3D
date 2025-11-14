@@ -6,12 +6,12 @@
 /*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:38:27 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/13 16:42:38 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/14 12:05:20 by abeaufil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
-#define CUBE_H
+# define CUBE_H
 
 # include "stdio.h"
 # include "stdlib.h"
@@ -97,7 +97,7 @@ typedef struct s_rgb
 	int			g;
 	int			b;
 	uint32_t	color;
-} t_rgb;
+}	t_rgb;
 
 typedef struct s_app
 {
@@ -118,7 +118,7 @@ typedef struct s_app
 	t_ray			ray;
 	t_textures		tex;
 	t_rgb			rgb;
-}				t_app;
+}	t_app;
 
 //EXEC
 
@@ -133,7 +133,7 @@ void		calcul_if_wall_hitted(t_app *app);
 void		create_image(t_app *app);
 void		clear_image(t_app *app);
 void		frametime(t_app *app, int fps);
-void		hook(void* param);
+void		hook(void *param);
 void		init_player_direction(t_app *app);
 uint32_t	get_rgba(uint8_t r, uint8_t g, uint8_t b);
 bool		init_mlx(t_app *app);
