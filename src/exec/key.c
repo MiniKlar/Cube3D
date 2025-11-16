@@ -3,35 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomont <lomont@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 02:57:02 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/13 11:05:45 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/16 23:35:19 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-static void	handle_left_right_keys(mlx_t *mlx, t_player *player)
+static void	handle_left_right_keys(mlx_t *mlx, t_player *player, char dir)
 {
 	double	old_dir_x;
 	double	old_plane_x;
-	double	rot_speed;
+	double	rot;
 
-	rot_speed = 0;
+	rot = 0;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		rot_speed = player->rot_speed;
+	{
+		if (dir == 'S' || dir == 'N')
+			rot = player->rot_speed;
+		else
+			rot = -player->rot_speed;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		rot_speed = -player->rot_speed;
+	{
+		if (dir == 'S' || dir == 'N')
+			rot = -player->rot_speed;
+		else
+			rot = player->rot_speed;
+	}
 	old_dir_x = player->dir_x;
-	player->dir_x = player->dir_x * cos(rot_speed) - player->dir_y
-		* sin(rot_speed);
-	player->dir_y = old_dir_x * sin(rot_speed) + player->dir_y * cos(rot_speed);
+	player->dir_x = player->dir_x * cos(rot) - player->dir_y * sin(rot);
+	player->dir_y = old_dir_x * sin(rot) + player->dir_y * cos(rot);
 	old_plane_x = player->plane_x;
-	player->plane_x = player->plane_x * cos(rot_speed) - player->plane_y
-		* sin(rot_speed);
-	player->plane_y = old_plane_x * sin(rot_speed) + player->plane_y
-		* cos(rot_speed);
+	player->plane_x = player->plane_x * cos(rot) - player->plane_y * sin(rot);
+	player->plane_y = old_plane_x * sin(rot) + player->plane_y * cos(rot);
 }
 
 static void	handle_q_d_keys(char **map, mlx_t *mlx, t_player *player)
@@ -89,7 +96,7 @@ void	hook(void *param)
 		mlx_close_window(app->mlx);
 	handle_w_s_keys(app->map, app->mlx, player);
 	handle_q_d_keys(app->map, app->mlx, player);
-	handle_left_right_keys(app->mlx, player);
+	handle_left_right_keys(app->mlx, player, app->direction);
 	clear_image(app);
 	render(app);
 	frametime(app, 0);
