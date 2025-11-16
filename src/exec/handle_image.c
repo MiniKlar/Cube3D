@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 06:20:36 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/13 12:05:42 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/17 00:19:15 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,17 @@
 void	create_image(t_app *app)
 {
 	app->img = mlx_new_image(app->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	if (!app->img || (mlx_image_to_window(app->mlx, app->img, 0, 0) < 0))
-		exit(1);
+	if (!app->img)
+		free_error_mlx(app);
+	if (mlx_image_to_window(app->mlx, app->img, 0, 0) < 0)
+		free_error_mlx(app);
 	app->textures[0] = mlx_load_png(app->tex.east_path);
-	if (!app->textures[0])
-		exit(2);
 	app->textures[1] = mlx_load_png(app->tex.north_path);
-	if (!app->textures[1])
-		exit(3);
 	app->textures[2] = mlx_load_png(app->tex.south_path);
-	if (!app->textures[2])
-		exit(4);
 	app->textures[3] = mlx_load_png(app->tex.west_path);
-	if (!app->textures[3])
-		exit(5);
+	if (!app->textures[0] || !app->textures[1] || !app->textures[2]
+		|| !app->textures[3])
+		free_error_mlx(app);
 }
 
 void	clear_image(t_app *app)

@@ -6,7 +6,7 @@
 /*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:42:58 by abeaufil          #+#    #+#             */
-/*   Updated: 2025/11/12 20:35:15 by lomont           ###   ########.fr       */
+/*   Updated: 2025/11/17 00:18:41 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ static void	free_mlx_texture(mlx_texture_t *textures[4])
 		i++;
 	}
 	return ;
+}
+
+void	free_error_mlx(t_app *app)
+{
+	mlx_t	*mlx;
+
+	mlx = app->mlx;
+	mlx_close_window(mlx);
+	mlx_terminate(mlx);
+	free_app(app);
+	ft_putendl_fd("Error MLX", 2);
+	exit(1);
 }
 
 void	free_app(t_app *app)
