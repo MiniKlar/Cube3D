@@ -2,4 +2,5 @@
 --leak-check=full
 --show-leak-kinds=all
 --track-origins=yes
+--track-fds=yes
 --suppressions=MLX42/mlx42.supp
