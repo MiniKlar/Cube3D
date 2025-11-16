@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abeaufil <abeaufil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lomont <lomont@student.42lehavre.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:38:27 by lomont            #+#    #+#             */
-/*   Updated: 2025/11/14 12:05:20 by abeaufil         ###   ########.fr       */
+/*   Updated: 2025/11/17 00:13:26 by lomont           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void		clear_image(t_app *app);
 void		frametime(t_app *app, int fps);
 void		hook(void *param);
 void		init_player_direction(t_app *app);
+void		free_error_mlx(t_app *app);
 uint32_t	get_rgba(uint8_t r, uint8_t g, uint8_t b);
 bool		init_mlx(t_app *app);
 
